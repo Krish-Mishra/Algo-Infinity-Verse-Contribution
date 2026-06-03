@@ -1750,6 +1750,15 @@ function renderProblems(filter = "all", searchQuery = "") {
     return matchesFilter && matchesSearch;
   });
 
+  // Count updation functionality
+  const visibleCountEl = document.getElementById("visible-count");
+  const totalCountEl = document.getElementById("total-count");
+  
+  if (visibleCountEl && totalCountEl) {
+    visibleCountEl.textContent = filteredProblems.length;
+    totalCountEl.textContent = practiceProblems.length;
+  }
+
   problemsGrid.innerHTML = filteredProblems
     .map(
       (problem) => `

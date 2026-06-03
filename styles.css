@@ -38,6 +38,10 @@ body {
   overflow-x: hidden;
 }
 
+.hidden {
+  display: none !important;
+}
+
 /* ===== LOADING SCREEN ===== */
 #loading-screen {
   position: fixed;
@@ -705,6 +709,21 @@ body {
   background: var(--primary);
   color: white;
   border-color: var(--primary);
+}
+
+/* Problem Counter CSS */
+.problem-counter-container {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  padding: 0 0.5rem;
+  font-weight: 500;
+}
+
+.problem-counter-container span {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.1rem;
 }
 
 .problems-grid {
