@@ -15,6 +15,86 @@ const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
 const PBKDF2_ITERATIONS = 210000;
 const PASSWORD_KEY_LENGTH = 32;
 
+// ── Rate limiting ────────────────────────────────────────────────────────────
+const SIGNUP_RATE_LIMIT = 5;
+const SIGNUP_WINDOW_MS = 15 * 60 * 1000;
+const signupAttempts = new Map();
+
+// Periodic sweeper — runs every SIGNUP_WINDOW_MS and deletes any identifier
+// whose timestamps have all aged out of the window.  This bounds the Map to
+// only identifiers that have been active within the last window period and
+// prevents unbounded memory growth under a sustained stream of unique IPs.
+const _signupSweeper = setInterval(() => {
+  const now = Date.now();
+  for (const [identifier, timestamps] of signupAttempts) {
+    const fresh = timestamps.filter((t) => now - t < SIGNUP_WINDOW_MS);
+    if (fresh.length === 0) {
+      signupAttempts.delete(identifier);
+    } else {
+      signupAttempts.set(identifier, fresh);
+    }
+  }
+}, SIGNUP_WINDOW_MS);
+
+// Allow the process to exit cleanly even while the interval is live
+// (relevant in test environments and graceful-shutdown scenarios).
+if (_signupSweeper.unref) _signupSweeper.unref();
+
+// IPs of reverse-proxies / load-balancers that are allowed to set
+// X-Forwarded-For.  Add your proxy CIDRs / IPs here or populate via
+// the TRUSTED_PROXIES env var (comma-separated) at startup.
+const TRUSTED_PROXIES = new Set(
+  (process.env.TRUSTED_PROXIES || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean)
+);
+
+function getClientIdentifier(req) {
+  const remoteAddress = req.socket?.remoteAddress || "unknown";
+
+  // Only honour X-Forwarded-For when the immediate TCP caller is a
+  // known trusted proxy — otherwise an attacker can supply any value
+  // they like and trivially bypass rate limiting.
+  if (
+    remoteAddress !== "unknown" &&
+    TRUSTED_PROXIES.has(remoteAddress) &&
+    req.headers["x-forwarded-for"]
+  ) {
+    // The left-most entry is the original client IP added by the
+    // first proxy in the chain; everything to the right can be spoofed.
+    const leftmost = req.headers["x-forwarded-for"].split(",")[0].trim();
+    if (leftmost) return leftmost;
+  }
+
+  return remoteAddress;
+}
+
+function isSignupRateLimited(identifier) {
+  const now = Date.now();
+  const attempts = signupAttempts.get(identifier) || [];
+  // Trim stale timestamps on every read so the per-identifier array stays
+  // small even between sweeper runs.
+  const recentAttempts = attempts.filter((t) => now - t < SIGNUP_WINDOW_MS);
+  signupAttempts.set(identifier, recentAttempts);
+  return recentAttempts.length >= SIGNUP_RATE_LIMIT;
+}
+
+function recordSignupAttempt(identifier) {
+  const now = Date.now();
+  const attempts = signupAttempts.get(identifier) || [];
+  // Trim before appending so the array never accumulates beyond
+  // SIGNUP_RATE_LIMIT + 1 entries between sweeper passes.
+  const recentAttempts = attempts.filter((t) => now - t < SIGNUP_WINDOW_MS);
+  recentAttempts.push(now);
+  signupAttempts.set(identifier, recentAttempts);
+}
+
+async function normalizeAuthDelay() {
+  return new Promise((resolve) => setTimeout(resolve, 500));
+}
+// ────────────────────────────────────────────────────────────────────────────
+
 const protectedPaths = new Set([
   "/community",
   "/community.html",
@@ -79,10 +159,10 @@ function fromBase64Url(input) {
 function sessionSecret() {
   if (process.env.SESSION_SECRET) return process.env.SESSION_SECRET;
   if (process.env.NODE_ENV === "production") {
-   throw new Error("SESSION_SECRET is required in production.");
+    throw new Error("SESSION_SECRET is required in production.");
   }
   return "dev-only-change-me-with-SESSION_SECRET-before-deploying";
- }
+}
 
 function sign(value) {
   return crypto.createHmac("sha256", sessionSecret()).update(value).digest("base64url");
@@ -261,6 +341,7 @@ function getSession(req) {
   const cookies = parseCookies(req.headers.cookie || "");
   return verifySessionToken(cookies[SESSION_COOKIE]);
 }
+
 function normalizePathname(pathname) {
   if (!pathname) return "/";
   return pathname.replace(/\/+$/, "") || "/";
@@ -311,12 +392,27 @@ async function handleApi(req, res, pathname) {
   }
 
   if (pathname === "/api/signup" && req.method === "POST") {
+    // ── Rate limit check ─────────────────────────────────────────────────────
+    const clientId = getClientIdentifier(req);
+
+    if (isSignupRateLimited(clientId)) {
+      await normalizeAuthDelay();
+      return sendJson(res, 429, {
+        error: "Too many signup attempts. Please try again later.",
+      });
+    }
+
+    // Record the attempt before processing so every inbound request counts,
+    // including those that fail validation or find a duplicate email.
+    recordSignupAttempt(clientId);
+    // ─────────────────────────────────────────────────────────────────────────
+
     const payload = await readJsonBody(req);
     const validationError = validateSignup(payload);
     if (validationError) return sendJson(res, 400, { error: validationError });
 
     const email = String(payload.email).trim().toLowerCase();
-   const existing = useFirestore
+    const existing = useFirestore
       ? await getUserByEmail(email)
       : (await readUsers()).find((user) => user.email === email);
     if (existing) {
@@ -345,8 +441,8 @@ async function handleApi(req, res, pathname) {
     const payload = await readJsonBody(req);
     const email = String(payload.email || "").trim().toLowerCase();
     const password = String(payload.password || "");
-   const user = useFirestore
-     ? await getUserByEmail(email)
+    const user = useFirestore
+      ? await getUserByEmail(email)
       : (await readUsers()).find((candidate) => candidate.email === email);
     if (!user || !passwordMatches(password, user.password)) {
       return sendJson(res, 401, { error: "Invalid email or password." });
