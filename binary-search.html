@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn Binary Search - Algo Infinity Verse</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="binary-search.css" /> 
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </head>
+  <body>
+    
+    <nav class="navbar">
+    </nav>
+
+    <main style="padding-top: 15px; padding-bottom: 60px;">    
+        <section class="section">
+            <div class="container">
+                
+                <h1 class="main-title gradient-text" style="text-align: center; font-size: 3.5rem; margin-bottom: 10px;">Binary Search</h1>
+                <p style="text-align: center; color: #a5a1ff; font-size: 1.3rem; margin-bottom: 60px; font-family: 'Poppins', sans-serif;">
+                    Mastering the Divide and Conquer Search Strategy
+                </p>
+
+                <div style="margin-bottom: 60px;">
+                    <h2 style="color: #fff; margin-bottom: 25px; font-family: 'Orbitron', sans-serif; font-size: 2.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
+                        <span style="margin-right: 15px;">📌</span> Deep Dive: Overview
+                    </h2>
+                    <p style="font-size: 1.2rem; line-height: 1.9; color: #e0e0e0; margin-bottom: 20px;">
+                        Binary Search is a highly efficient search algorithm that follows the <strong>Divide and Conquer</strong> paradigm. Instead of scanning through a collection element by element (which is how a Linear Search operates in $O(n)$ time), Binary Search drastically reduces the search space by cutting it in half after every single comparison.
+                    </p>
+                    <p style="font-size: 1.2rem; line-height: 1.9; color: #e0e0e0;">
+                        To understand its power, consider searching through an array of one million items. A linear search might take up to one million checks in the worst-case scenario. Binary search, by constantly halving the data, guarantees a result in a maximum of just <strong>20 steps</strong>.
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 60px;">
+                    <h2 style="color: #fff; margin-bottom: 25px; font-family: 'Orbitron', sans-serif; font-size: 2.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
+                        <span style="margin-right: 15px;">⚙️</span> Prerequisites & Rules
+                    </h2>
+                    <ul style="font-size: 1.2rem; line-height: 1.9; color: #e0e0e0; margin-left: 25px;">
+                        <li style="margin-bottom: 15px;"><strong>Random Access:</strong> The underlying data structure must allow for direct index access in $O(1)$ time. This is why binary search is perfect for Arrays, but highly inefficient for Linked Lists.</li>
+                        <li style="margin-bottom: 15px;"><strong>The Golden Rule — Monotonicity:</strong> The array <strong>must be sorted</strong> (either strictly increasing or strictly decreasing). If the array is unsorted, you must sort it first. Keep in mind that the fastest comparison-based sorting algorithms take $O(n \log n)$ time, so sorting an array just to perform a single binary search is counterproductive; it is best used when searching an array multiple times.</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 60px;">
+                    <h2 style="color: #fff; margin-bottom: 25px; font-family: 'Orbitron', sans-serif; font-size: 2.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
+                        <span style="margin-right: 15px;">🔍</span> The Algorithm Breakdown
+                    </h2>
+                    <p style="font-size: 1.2rem; line-height: 1.9; color: #e0e0e0; margin-bottom: 25px;">
+                        The logic mirrors how you might look up a word in a physical dictionary. You open the book to the middle. If your target word alphabetically precedes the page you are on, you know with absolute certainty it is in the left half of the book. You ignore the right half entirely and repeat the process.
+                    </p>
+                    
+                    <div style="background: rgba(108, 99, 255, 0.05); padding: 30px; border-radius: 12px; border-left: 4px solid #6c63ff;">
+                        <ol style="font-size: 1.2rem; line-height: 2.1; color: #e0e0e0; margin-left: 20px;">
+                            <li>Initialize a <code>low</code> pointer at the 0th index and a <code>high</code> pointer at the final index.</li>
+                            <li>Calculate the middle index: <code>mid = Math.floor((low + high) / 2)</code>. <em>(Note: To prevent integer overflow in languages like C++ or Java, use <code>low + (high - low) / 2</code>).</em></li>
+                            <li><strong>Comparison:</strong> Look at the value at the <code>mid</code> index.
+                                <ul style="margin-top: 10px; margin-bottom: 10px; list-style-type: disc;">
+                                    <li>If <code>array[mid] == target</code>: The search is complete. Return the index.</li>
+                                    <li>If <code>array[mid] < target</code>: The target must be to the right. Update <code>low = mid + 1</code>.</li>
+                                    <li>If <code>array[mid] > target</code>: The target must be to the left. Update <code>high = mid - 1</code>.</li>
+                                </ul>
+                            </li>
+                            <li>Repeat steps 2 and 3. The loop terminates when the target is found or when the <code>low</code> pointer crosses the <code>high</code> pointer, meaning the element does not exist in the array.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 70px;">
+                    <h2 style="color: #fff; margin-bottom: 25px; font-family: 'Orbitron', sans-serif; font-size: 2.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
+                        <span style="margin-right: 15px;">🕹️</span> Interactive Visualizer
+                    </h2>
+                    <p style="font-size: 1.2rem; color: #e0e0e0; margin-bottom: 30px; text-align: center;">
+                        Let's simulate the algorithm. We are searching for the target number <strong>37</strong>.
+                    </p>
+                    
+                    <div class="controls" style="margin-bottom: 30px;">
+                        <button id="step-btn" class="btn btn-primary" style="font-size: 1.1rem; padding: 12px 28px; letter-spacing: 1px;">Step Forward</button>
+                        <button id="reset-btn" class="btn btn-secondary" style="font-size: 1.1rem; padding: 12px 28px; letter-spacing: 1px;">Reset</button>
+                    </div>
+
+                    <div class="array-container" id="array-container" style="padding: 40px; margin-bottom: 25px;"></div>
+
+                    <div class="status-panel" style="padding: 30px; background: rgba(0,0,0,0.2);">
+                        <p id="status-text" style="color: #fff; font-size: 1.25rem; margin-bottom: 20px; font-family: 'Fira Code', monospace;">Awaiting execution...</p>
+                        <div class="pointers" style="display: flex; gap: 30px; justify-content: center;">
+                            <span class="badge low-badge" style="font-size: 1.1rem; padding: 10px 20px;">Low: <span id="low-val">0</span></span>
+                            <span class="badge mid-badge" style="font-size: 1.1rem; padding: 10px 20px;">Mid: <span id="mid-val">-</span></span>
+                            <span class="badge high-badge" style="font-size: 1.1rem; padding: 10px 20px;">High: <span id="high-val">9</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 60px;">
+                    <h2 style="color: #fff; margin-bottom: 30px; font-family: 'Orbitron', sans-serif; font-size: 2.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
+                        <span style="margin-right: 15px;">⏱️</span> Mathematical Complexity
+                    </h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+                        <div class="dashboard-card" style="text-align: left; padding: 35px; border-top: 4px solid #ff9800;">
+                            <h3 style="color: #fff; margin-bottom: 20px; font-size: 1.6rem;">Time Complexity</h3>
+                            <ul style="line-height: 1.9; font-size: 1.15rem; color: #e0e0e0; margin-left: 20px;">
+                                <li style="margin-bottom: 10px;"><strong>Best Case: O(1)</strong><br>The element we are looking for is exactly at the middle index on the very first calculation.</li>
+                                <li style="margin-bottom: 10px;"><strong>Worst Case: O(log n)</strong><br>The target is at the very ends of the array, or doesn't exist, forcing the algorithm to halve the array until only 1 element remains.</li>
+                                <li><strong>Average Case: O(log n)</strong></li>
+                            </ul>
+                        </div>
+                        <div class="dashboard-card" style="text-align: left; padding: 35px; border-top: 4px solid #00d26a;">
+                            <h3 style="color: #fff; margin-bottom: 20px; font-size: 1.6rem;">Space Complexity</h3>
+                            <ul style="line-height: 1.9; font-size: 1.15rem; color: #e0e0e0; margin-left: 20px;">
+                                <li style="margin-bottom: 10px;"><strong>Iterative Implementation: O(1)</strong><br>We only need to store three variables in memory (the <code>low</code>, <code>high</code>, and <code>mid</code> pointers) regardless of the size of the array.</li>
+                                <li><strong>Recursive Implementation: O(log n)</strong><br>While technically doing the same operations, recursion requires memory overhead for the call stack. A new frame is added to the stack for every halving step.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 style="color: #fff; margin-bottom: 25px; font-family: 'Orbitron', sans-serif; font-size: 2.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
+                        <span style="margin-right: 15px;">💻</span> Interview Practice
+                    </h2>
+                    <p style="font-size: 1.2rem; line-height: 1.9; color: #e0e0e0; margin-bottom: 25px;">
+                        Binary search variations are heavily tested in technical interviews. Master these patterns to build your intuition:
+                    </p>
+                    <div style="background: rgba(0, 210, 106, 0.05); padding: 30px; border-radius: 12px;">
+                        <ul style="margin-left: 20px; line-height: 2.2; font-size: 1.2rem;">
+                            <li><span class="badge" style="background: #2a2a40; border: 1px solid #444; color: #00d26a; margin-right: 10px;">Easy</span> <a href="https://leetcode.com/problems/binary-search/" target="_blank" style="color: #fff; text-decoration: none; border-bottom: 1px dashed #00d26a;">Basic Implementation (LeetCode 704)</a></li>
+                            <li><span class="badge" style="background: #2a2a40; border: 1px solid #444; color: #00d26a; margin-right: 10px;">Easy</span> <a href="https://leetcode.com/problems/search-insert-position/" target="_blank" style="color: #fff; text-decoration: none; border-bottom: 1px dashed #00d26a;">Search Insert Position (LeetCode 35)</a></li>
+                            <li><span class="badge" style="background: #2a2a40; border: 1px solid #444; color: #ffb74d; margin-right: 10px;">Medium</span> <a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/" target="_blank" style="color: #fff; text-decoration: none; border-bottom: 1px dashed #ffb74d;">Find First and Last Position (LeetCode 34)</a></li>
+                            <li><span class="badge" style="background: #2a2a40; border: 1px solid #444; color: #ffb74d; margin-right: 10px;">Medium</span> <a href="https://leetcode.com/problems/search-in-rotated-sorted-array/" target="_blank" style="color: #fff; text-decoration: none; border-bottom: 1px dashed #ffb74d;">Search in Rotated Sorted Array (LeetCode 33)</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="binary-search.js"></script> 
+  </body>
+</html>
