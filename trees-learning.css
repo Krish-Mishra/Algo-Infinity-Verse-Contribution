@@ -174,7 +174,7 @@
 }
 
 .trees-code-lang {
-  font-family: Fira Code, monospace;
+  font-family: "Fira Code", monospace;
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--primary-light);
@@ -212,7 +212,7 @@
 }
 
 .trees-code-block code {
-  font-family: Fira Code, Consolas, Monaco, monospace;
+  font-family: "Fira Code", Consolas, Monaco, monospace;
   font-size: 0.85rem;
   line-height: 1.7;
   color: #e6edf3;
@@ -311,7 +311,7 @@
 
 .trees-output pre {
   margin: 0;
-  font-family: Fira Code, monospace;
+  font-family: "Fira Code", monospace;
   font-size: 0.82rem;
   line-height: 1.6;
   color: var(--text-secondary);
@@ -430,14 +430,14 @@
 }
 
 .trees-svg-text {
-  font-family: Poppins, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 12px;
   fill: #ffffff;
   text-anchor: middle;
 }
 
 .trees-svg-text-title {
-  font-family: Orbitron, sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 13px;
   font-weight: bold;
   fill: var(--primary-light);
