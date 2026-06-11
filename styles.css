@@ -494,6 +494,8 @@ body {
   transition: all 0.2s ease;
   z-index: 100;
   pointer-events: none;
+  max-height: 65vh; 
+  overflow-y: auto;
 }
 
 .dropdown-menu-end {
