@@ -1,19 +1,12 @@
 /**
  * computer-architecture.js
  * Interactivity for the Computer Architecture Learning page:
- 
  *  - Hero typing animation
- 
  *  - Stats counter animation (uses global animateValue from script.js)
- 
  *  - Sidebar scroll-spy (active link tracking)
- 
  *  - Progress bar (tracks completed topics via localStorage)
- 
  *  - Exercise toggle (show/hide solutions)
- 
  *  - Copy code button
- 
  *  - Interactive Computer Architecture Quiz
  */
 

@@ -1,146 +1,270 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // ── Navigation & Active State Tracking ──
-  const sections = document.querySelectorAll('.bit-manipulation-lesson');
-  const navLinks = document.querySelectorAll('.bit-manipulation-sidebar-nav a');
+/**
+ * bit-manipulation-learning.js
+ * Interactivity for the Prefix Sum Learning page:
+ *  - Hero typing animation
+ *  - Stats counter animation (uses global animateValue from script.js)
+ *  - Sidebar scroll-spy (active link tracking)
+ *  - Progress bar (tracks completed topics via localStorage)
+ *  - Exercise toggle (show/hide solutions)
+ *  - Copy code button
+ */
 
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px 0px -60% 0px', // Trigger when section is in top 40%
-    threshold: 0.1,
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        // Remove active class from all
-        navLinks.forEach((link) => link.classList.remove('active'));
-        
-        // Add active class to corresponding nav link
-        const targetId = entry.target.getAttribute('id');
-        const activeLink = document.querySelector(`.bit-manipulation-sidebar-nav a[href="#${targetId}"]`);
-        if (activeLink) {
-          activeLink.classList.add('active');
-        }
-        
-        // Update Progress Bar
-        updateProgress(targetId);
-      }
-    });
-  }, observerOptions);
-
-  sections.forEach((section) => observer.observe(section));
-
-  // ── Progress Bar Calculation ──
-  function updateProgress(activeId) {
-    const total = sections.length;
-    let currentIndex = 0;
-    
-    sections.forEach((section, index) => {
-      if (section.id === activeId) {
-        currentIndex = index + 1;
-      }
-    });
-
-    const percent = Math.round((currentIndex / total) * 100);
-    const progressFill = document.getElementById('bit-manipulation-progress-fill');
-    const progressText = document.getElementById('bit-manipulation-progress-text');
-
-    if (progressFill && progressText) {
-      progressFill.style.width = `${percent}%`;
-      progressText.textContent = `${percent}% Completed`;
-    }
-    
-    // Save progress to local storage with guard
-    try {
-      localStorage.setItem('bitManipulationProgress', percent);
-    } catch (e) {
-      console.warn('localStorage is not available', e);
-    }
-  }
-
-  // Restore progress on load if previously saved
-  try {
-    const savedProgress = localStorage.getItem('bitManipulationProgress');
-    if (savedProgress) {
-      const progressFill = document.getElementById('bit-manipulation-progress-fill');
-      const progressText = document.getElementById('bit-manipulation-progress-text');
-      if (progressFill && progressText) {
-        progressFill.style.width = `${savedProgress}%`;
-        progressText.textContent = `${savedProgress}% Completed`;
-      }
-    }
-  } catch(e) {
-    console.warn('localStorage is not available', e);
-  }
-
-  // ── Code Block Copy Functionality ──
-  const copyButtons = document.querySelectorAll('.bit-manipulation-code-copy');
-  
-  copyButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const targetId = button.getAttribute('data-target');
-      const codeBlock = document.getElementById(targetId);
-      
-      if (codeBlock) {
-        // Get raw text without any HTML tags
-        const textToCopy = codeBlock.innerText;
-        
-        navigator.clipboard.writeText(textToCopy).then(() => {
-          // Visual feedback
-          const originalText = button.innerHTML;
-          button.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
-          button.classList.add('copied');
-          
-          setTimeout(() => {
-            button.innerHTML = originalText;
-            button.classList.remove('copied');
-          }, 2000);
-        }).catch(err => {
-          console.error('Failed to copy text: ', err);
-        });
-      }
-    });
-  });
-
-  // ── Solution Toggle Functionality ──
-  const toggleButtons = document.querySelectorAll('.bit-manipulation-exercise-toggle');
-  
-  toggleButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const targetId = button.getAttribute('data-target');
-      const solutionBlock = document.getElementById(targetId);
-      
-      if (solutionBlock) {
-        const isVisible = solutionBlock.classList.contains('visible');
-        
-        if (isVisible) {
-          solutionBlock.classList.remove('visible');
-          button.innerHTML = '<i class="fa-solid fa-eye"></i> View Solution';
-        } else {
-          solutionBlock.classList.add('visible');
-          button.innerHTML = '<i class="fa-solid fa-eye-slash"></i> Hide Solution';
-        }
-      }
-    });
-  });
-
-  // ── Smooth Scrolling for Sidebar Links ──
-  navLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href');
-      const targetSection = document.querySelector(targetId);
-      
-      if (targetSection) {
-        // Adjust scroll position for fixed navbar
-        const navbarHeight = document.querySelector('.navbar') ? document.querySelector('.navbar').offsetHeight : 80;
-        const targetPosition = targetSection.getBoundingClientRect().top + window.scrollY - navbarHeight - 20;
-        
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  initHeroTyping();
+  initStatsAnimation();
+  initExerciseToggles();
+  initCopyButtons();
+  initSidebarSpy();
+  initProgressTracker();
 });
+
+/* ─────────────────────────────────────────────
+   Hero Typing Animation
+   ───────────────────────────────────────────── */
+function initHeroTyping() {
+  const el = document.getElementById("typingTextBit");
+  if (!el) return;
+
+  const words = [
+    "XOR Swaps",
+    "Bit Masking",
+    "Power of Two",
+    "Shift Operators",
+    "O(1) Tricks"
+];
+
+  let wordIdx = 0;
+  let charIdx = 0;
+  let isDeleting = false;
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (prefersReducedMotion) {
+    el.textContent = words[0];
+    return;
+  }
+
+  function tick() {
+    const current = words[wordIdx];
+
+    if (isDeleting) {
+      el.textContent = current.substring(0, charIdx - 1);
+      charIdx--;
+    } else {
+      el.textContent = current.substring(0, charIdx + 1);
+      charIdx++;
+    }
+
+    let speed = isDeleting ? 50 : 100;
+
+    if (!isDeleting && charIdx === current.length) {
+      speed = 2000;
+      isDeleting = true;
+    } else if (isDeleting && charIdx === 0) {
+      isDeleting = false;
+      wordIdx = (wordIdx + 1) % words.length;
+      speed = 500;
+    }
+
+    requestAnimationFrame(() => setTimeout(tick, speed));
+  }
+
+  tick();
+}
+
+/* ─────────────────────────────────────────────
+   Stats Counter Animation
+   ───────────────────────────────────────────── */
+function initStatsAnimation() {
+  const statNumbers = document.querySelectorAll(".stat-number[data-target]");
+  if (!statNumbers.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (typeof animateValue === "function") {
+            animateValue(entry.target);
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5, rootMargin: "0px 0px -50px 0px" }
+  );
+
+  statNumbers.forEach((s) => observer.observe(s));
+}
+
+/* ─────────────────────────────────────────────
+   Exercise Show/Hide Toggle
+   ───────────────────────────────────────────── */
+function initExerciseToggles() {
+  document.querySelectorAll(".bit-exercise-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.getAttribute("aria-controls") || btn.getAttribute("data-target");
+      const solution = document.getElementById(targetId);
+      if (!solution) return;
+
+      const isVisible = solution.classList.toggle("visible");
+      btn.setAttribute("aria-expanded", isVisible);
+      btn.textContent = isVisible ? "Hide Solution" : "Show Solution";
+    });
+  });
+}
+
+/* ─────────────────────────────────────────────
+   Copy Code Button
+   ───────────────────────────────────────────── */
+function initCopyButtons() {
+  document.querySelectorAll(".bit-code-copy").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      let code = btn.getAttribute("data-code");
+      if (!code) {
+        const targetId = btn.getAttribute("data-target");
+        if (targetId) {
+            const block = document.getElementById(targetId);
+            if (block) code = block.innerText;
+        }
+      }
+      if (!code) return;
+
+      try {
+        await navigator.clipboard.writeText(code);
+        btn.textContent = "Copied!";
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.textContent = "Copy";
+          btn.classList.remove("copied");
+        }, 2000);
+      } catch {
+        // Fallback for older browsers
+        const textarea = document.createElement("textarea");
+        textarea.value = code;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        btn.textContent = "Copied!";
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.textContent = "Copy";
+          btn.classList.remove("copied");
+        }, 2000);
+      }
+    });
+  });
+}
+
+/* ─────────────────────────────────────────────
+   Sidebar Scroll-Spy
+   ───────────────────────────────────────────── */
+function initSidebarSpy() {
+  const links = document.querySelectorAll(".bit-sidebar-nav a");
+  const lessons = document.querySelectorAll(".bit-lesson");
+  if (!links.length || !lessons.length) return;
+
+  const NAV_HEIGHT = 100; // offset for fixed navbar
+
+  function getActiveId() {
+    let bestId = null;
+    let bestDist = Infinity;
+
+    lessons.forEach((lesson) => {
+      const rect = lesson.getBoundingClientRect();
+      const dist = Math.abs(rect.top - NAV_HEIGHT);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestId = lesson.getAttribute("id");
+      }
+    });
+
+    return bestId;
+  }
+
+  let ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+
+    requestAnimationFrame(() => {
+      const id = getActiveId();
+      if (id) {
+        links.forEach((l) => l.classList.remove("active"));
+        const active = document.querySelector(
+          `.bit-sidebar-nav a[href="#${id}"]`
+        );
+        if (active) active.classList.add("active");
+      }
+      ticking = false;
+    });
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll(); // run once on load
+}
+
+/* ─────────────────────────────────────────────
+   Progress Tracker
+   ───────────────────────────────────────────── */
+function initProgressTracker() {
+  const STORAGE_KEY = "bit-manipulation-learning-progress";
+  const TOTAL_TOPICS = 5; // Adjust this if you change the number of topics
+  const fill = document.getElementById("progressFill");
+  const count = document.getElementById("progressCount");
+  const bar = document.querySelector(".bit-progress-bar");
+
+  if (!fill || !count) return;
+
+  let completed = new Set();
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (Array.isArray(saved)) completed = new Set(saved);
+  } catch {
+    /* ignore */
+  }
+
+  function updateUI() {
+    const pct = Math.round((completed.size / TOTAL_TOPICS) * 100);
+    fill.style.width = pct + "%";
+    count.textContent = completed.size;
+    if (bar) bar.setAttribute("aria-valuenow", pct);
+  }
+
+  updateUI();
+
+  const lessons = document.querySelectorAll(".bit-lesson");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      let changed = false;
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const topic = entry.target.getAttribute("data-topic");
+          if (topic && !completed.has(topic)) {
+            completed.add(topic);
+            changed = true;
+          }
+        }
+      });
+      if (changed) {
+        try {
+          localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify([...completed])
+          );
+        } catch {
+          /* ignore */
+        }
+        updateUI();
+      }
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -20% 0px" }
+  );
+
+  lessons.forEach((l) => observer.observe(l));
+}

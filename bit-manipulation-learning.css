@@ -9,13 +9,13 @@
 }
 
 /* ── Topic Navigation Sidebar ── */
-.bit-manipulation-layout {
+.bit-layout {
   display: flex;
   gap: 2rem;
   align-items: flex-start;
 }
 
-.bit-manipulation-sidebar {
+.bit-sidebar {
   position: sticky;
   top: 100px;
   width: 240px;
@@ -27,7 +27,7 @@
   backdrop-filter: blur(10px);
 }
 
-.bit-manipulation-sidebar-title {
+.bit-sidebar-title {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -38,13 +38,13 @@
   margin-bottom: 0.5rem;
 }
 
-.bit-manipulation-sidebar-nav {
+.bit-sidebar-nav {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.bit-manipulation-sidebar-nav li a {
+.bit-sidebar-nav li a {
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -56,26 +56,26 @@
   border-left: 3px solid transparent;
 }
 
-.bit-manipulation-sidebar-nav li a:hover,
-.bit-manipulation-sidebar-nav li a.active {
+.bit-sidebar-nav li a:hover,
+.bit-sidebar-nav li a.active {
   color: var(--primary-light);
   background: rgba(139, 92, 246, 0.08);
   border-left-color: var(--primary);
 }
 
-.bit-manipulation-sidebar-nav li a .nav-icon {
+.bit-sidebar-nav li a .nav-icon {
   width: 20px;
   text-align: center;
   font-size: 0.9rem;
 }
 
-.bit-manipulation-main-content {
+.bit-main-content {
   flex: 1;
   min-width: 0;
 }
 
 /* ── Lesson Section Card ── */
-.bit-manipulation-lesson {
+.bit-lesson {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 16px;
@@ -85,18 +85,18 @@
   transition: border-color 0.3s ease;
 }
 
-.bit-manipulation-lesson:target {
+.bit-lesson:target {
   border-color: var(--primary);
 }
 
-.bit-manipulation-lesson-header {
+.bit-lesson-header {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
-.bit-manipulation-lesson-number {
+.bit-lesson-number {
   font-family: Orbitron, sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
@@ -106,37 +106,37 @@
   flex-shrink: 0;
 }
 
-.bit-manipulation-lesson-header h3 {
+.bit-lesson-header h3 {
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-primary);
   margin: 0;
 }
 
-.bit-manipulation-lesson p,
-.bit-manipulation-lesson li {
+.bit-lesson p,
+.bit-lesson li {
   color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.75;
   margin-bottom: 0.75rem;
 }
 
-.bit-manipulation-lesson ul,
-.bit-manipulation-lesson ol {
+.bit-lesson ul,
+.bit-lesson ol {
   padding-left: 1.5rem;
   margin-bottom: 1rem;
 }
 
-.bit-manipulation-lesson li {
+.bit-lesson li {
   margin-bottom: 0.4rem;
 }
 
-.bit-manipulation-lesson strong {
+.bit-lesson strong {
   color: var(--text-primary);
 }
 
 /* ── Concept Card (inline sub-card) ── */
-.bit-manipulation-concept-card {
+.bit-concept-card {
   background: var(--dark-surface);
   border: 1px solid var(--glass-border);
   border-radius: 12px;
@@ -144,19 +144,19 @@
   margin: 1rem 0;
 }
 
-.bit-manipulation-concept-card h4 {
+.bit-concept-card h4 {
   font-size: 1rem;
   font-weight: 600;
   color: var(--accent);
   margin: 0 0 0.5rem;
 }
 
-.bit-manipulation-concept-card p {
+.bit-concept-card p {
   margin-bottom: 0;
 }
 
 /* ── Syntax-highlighted Code Block ── */
-.bit-manipulation-code-block {
+.bit-code-block {
   position: relative;
   margin: 1rem 0 1.5rem;
   border-radius: 12px;
@@ -164,7 +164,7 @@
   border: 1px solid var(--glass-border);
 }
 
-.bit-manipulation-code-header {
+.bit-code-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -173,7 +173,7 @@
   border-bottom: 1px solid var(--glass-border);
 }
 
-.bit-manipulation-code-lang {
+.bit-code-lang {
   font-family: Fira Code, monospace;
   font-size: 0.75rem;
   font-weight: 500;
@@ -182,7 +182,7 @@
   letter-spacing: 0.05em;
 }
 
-.bit-manipulation-code-copy {
+.bit-code-copy {
   background: none;
   border: 1px solid var(--glass-border);
   color: var(--text-secondary);
@@ -194,24 +194,24 @@
   transition: all 0.2s ease;
 }
 
-.bit-manipulation-code-copy:hover {
+.bit-code-copy:hover {
   color: var(--text-primary);
   border-color: var(--primary-light);
 }
 
-.bit-manipulation-code-copy.copied {
+.bit-code-copy.copied {
   color: #22c55e;
   border-color: #22c55e;
 }
 
-.bit-manipulation-code-block pre {
+.bit-code-block pre {
   margin: 0;
   padding: 1.25rem 1.5rem;
   background: #0d1117;
   overflow-x: auto;
 }
 
-.bit-manipulation-code-block code {
+.bit-code-block code {
   font-family: Fira Code, Consolas, Monaco, monospace;
   font-size: 0.85rem;
   line-height: 1.7;
@@ -219,17 +219,17 @@
 }
 
 /* Token colors for syntax highlighting */
-.bit-manipulation-code-block .tok-kw { color: #c792ea; font-weight: bold; }
-.bit-manipulation-code-block .tok-fn { color: #82aaff; }
-.bit-manipulation-code-block .tok-str { color: #c3e88d; }
-.bit-manipulation-code-block .tok-num { color: #f78c6c; }
-.bit-manipulation-code-block .tok-cmt { color: #546e7a; font-style: italic; }
-.bit-manipulation-code-block .tok-op { color: #89ddff; }
-.bit-manipulation-code-block .tok-bi { color: #ffcb6b; }
-.bit-manipulation-code-block .tok-var { color: #f07178; }
+.bit-code-block .tok-kw { color: #c792ea; font-weight: bold; }
+.bit-code-block .tok-fn { color: #82aaff; }
+.bit-code-block .tok-str { color: #c3e88d; }
+.bit-code-block .tok-num { color: #f78c6c; }
+.bit-code-block .tok-cmt { color: #546e7a; font-style: italic; }
+.bit-code-block .tok-op { color: #89ddff; }
+.bit-code-block .tok-bi { color: #ffcb6b; }
+.bit-code-block .tok-var { color: #f07178; }
 
 /* ── Exercise Box ── */
-.bit-manipulation-exercise {
+.bit-exercise {
   background: rgba(34, 197, 94, 0.06);
   border: 1px solid rgba(34, 197, 94, 0.25);
   border-radius: 12px;
@@ -237,7 +237,7 @@
   margin: 1.5rem 0;
 }
 
-.bit-manipulation-exercise-title {
+.bit-exercise-title {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -247,16 +247,16 @@
   margin-bottom: 0.75rem;
 }
 
-.bit-manipulation-exercise-title i {
+.bit-exercise-title i {
   font-size: 1.1rem;
 }
 
-.bit-manipulation-exercise ol,
-.bit-manipulation-exercise ul {
+.bit-exercise ol,
+.bit-exercise ul {
   margin-bottom: 0.75rem;
 }
 
-.bit-manipulation-exercise-toggle {
+.bit-exercise-toggle {
   background: rgba(34, 197, 94, 0.15);
   border: 1px solid rgba(34, 197, 94, 0.3);
   color: #22c55e;
@@ -269,29 +269,29 @@
   transition: all 0.2s ease;
 }
 
-.bit-manipulation-exercise-toggle:hover {
+.bit-exercise-toggle:hover {
   background: rgba(34, 197, 94, 0.25);
 }
 
-.bit-manipulation-exercise-solution {
+.bit-exercise-solution {
   display: none;
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(34, 197, 94, 0.2);
 }
 
-.bit-manipulation-exercise-solution.visible {
+.bit-exercise-solution.visible {
   display: block;
 }
 
-.bit-manipulation-exercise-solution p {
+.bit-exercise-solution p {
   font-size: 0.85rem;
   color: var(--text-secondary);
   margin-bottom: 0.5rem;
 }
 
 /* ── Output / Result Block ── */
-.bit-manipulation-output {
+.bit-output {
   background: rgba(6, 182, 212, 0.06);
   border: 1px solid rgba(6, 182, 212, 0.25);
   border-radius: 10px;
@@ -299,7 +299,7 @@
   margin: 0.75rem 0 1.25rem;
 }
 
-.bit-manipulation-output-label {
+.bit-output-label {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -308,7 +308,7 @@
   margin-bottom: 0.4rem;
 }
 
-.bit-manipulation-output pre {
+.bit-output pre {
   margin: 0;
   font-family: Fira Code, monospace;
   font-size: 0.82rem;
@@ -317,7 +317,7 @@
 }
 
 /* ── Progress Tracker ── */
-.bit-manipulation-progress-bar {
+.bit-progress-bar {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -329,7 +329,7 @@
   backdrop-filter: blur(10px);
 }
 
-.bit-manipulation-progress-track {
+.bit-progress-track {
   flex: 1;
   height: 8px;
   background: var(--dark-surface);
@@ -337,7 +337,7 @@
   overflow: hidden;
 }
 
-.bit-manipulation-progress-fill {
+.bit-progress-fill {
   height: 100%;
   width: 0%;
   background: var(--gradient-4);
@@ -345,7 +345,7 @@
   transition: width 0.5s ease;
 }
 
-.bit-manipulation-progress-text {
+.bit-progress-text {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-primary);
@@ -353,7 +353,7 @@
 }
 
 /* ── Key Takeaway / Tip Callout ── */
-.bit-manipulation-callout {
+.bit-callout {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
@@ -364,33 +364,33 @@
   margin: 1.25rem 0;
 }
 
-.bit-manipulation-callout-icon {
+.bit-callout-icon {
   font-size: 1.3rem;
   flex-shrink: 0;
   line-height: 1.4;
 }
 
-.bit-manipulation-callout p {
+.bit-callout p {
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.6;
 }
 
 /* ── Table Styling ── */
-.bit-manipulation-table-wrap {
+.bit-table-wrap {
   overflow-x: auto;
   margin: 1.25rem 0 1.75rem;
   border-radius: 12px;
   border: 1px solid var(--glass-border);
 }
 
-.bit-manipulation-table {
+.bit-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.88rem;
 }
 
-.bit-manipulation-table th {
+.bit-table th {
   background: rgba(139, 92, 246, 0.15);
   color: var(--primary-light);
   font-weight: 600;
@@ -399,18 +399,18 @@
   white-space: nowrap;
 }
 
-.bit-manipulation-table td {
+.bit-table td {
   padding: 0.65rem 1rem;
   border-top: 1px solid var(--glass-border);
   color: var(--text-secondary);
 }
 
-.bit-manipulation-table tr:hover td {
+.bit-table tr:hover td {
   background: rgba(255, 255, 255, 0.02);
 }
 
 /* ── SVG Diagrams ── */
-.bit-manipulation-svg-container {
+.bit-svg-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -422,27 +422,27 @@
   overflow-x: auto;
 }
 
-.bit-manipulation-svg-diagram {
+.bit-svg-diagram {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-.bit-manipulation-svg-text {
+.bit-svg-text {
   font-family: Poppins, sans-serif;
   font-size: 12px;
   fill: #ffffff;
   text-anchor: middle;
 }
 
-.bit-manipulation-svg-text-title {
+.bit-svg-text-title {
   font-family: Orbitron, sans-serif;
   font-size: 13px;
   font-weight: bold;
   fill: var(--primary-light);
 }
 
-.bit-manipulation-svg-node {
+.bit-svg-node {
   fill: rgba(139, 92, 246, 0.15);
   stroke: var(--primary);
   stroke-width: 2px;
@@ -451,12 +451,12 @@
   transition: all 0.3s ease;
 }
 
-.bit-manipulation-svg-node:hover {
+.bit-svg-node:hover {
   fill: rgba(139, 92, 246, 0.3);
   stroke: var(--accent);
 }
 
-.bit-manipulation-svg-node-alt {
+.bit-svg-node-alt {
   fill: rgba(236, 72, 153, 0.1);
   stroke: var(--accent);
   stroke-width: 2px;
@@ -464,11 +464,11 @@
   ry: 8px;
 }
 
-.bit-manipulation-svg-node-alt:hover {
+.bit-svg-node-alt:hover {
   fill: rgba(236, 72, 153, 0.2);
 }
 
-.bit-manipulation-svg-node-green {
+.bit-svg-node-green {
   fill: rgba(34, 197, 94, 0.1);
   stroke: #22c55e;
   stroke-width: 2px;
@@ -476,13 +476,13 @@
   ry: 8px;
 }
 
-.bit-manipulation-svg-line {
+.bit-svg-line {
   stroke: var(--glass-border);
   stroke-width: 2px;
   fill: none;
 }
 
-.bit-manipulation-svg-line-active {
+.bit-svg-line-active {
   stroke: var(--primary-light);
   stroke-width: 2px;
   stroke-dasharray: 4;
@@ -497,86 +497,86 @@
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-  .bit-manipulation-sidebar {
+  .bit-sidebar {
     display: none;
   }
 }
 
 @media (max-width: 768px) {
-  .bit-manipulation-lesson {
+  .bit-lesson {
     padding: 1.5rem;
   }
 
-  .bit-manipulation-lesson-header h3 {
+  .bit-lesson-header h3 {
     font-size: 1.15rem;
   }
 
-  .bit-manipulation-code-block pre {
+  .bit-code-block pre {
     padding: 1rem;
   }
 
-  .bit-manipulation-code-block code {
+  .bit-code-block code {
     font-size: 0.78rem;
   }
 
-  .bit-manipulation-progress-bar {
+  .bit-progress-bar {
     flex-direction: column;
     align-items: stretch;
     gap: 0.5rem;
   }
 
-  .bit-manipulation-progress-text {
+  .bit-progress-text {
     text-align: center;
   }
 
-  .bit-manipulation-callout {
+  .bit-callout {
     flex-direction: column;
     gap: 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .bit-manipulation-lesson {
+  .bit-lesson {
     padding: 1.25rem;
     border-radius: 12px;
   }
 
-  .bit-manipulation-lesson-header {
+  .bit-lesson-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
 
-  .bit-manipulation-exercise {
+  .bit-exercise {
     padding: 1rem;
   }
 }
 
 /* ── Accessibility: focus-visible ── */
-.bit-manipulation-sidebar-nav li a:focus-visible,
-.bit-manipulation-code-copy:focus-visible,
-.bit-manipulation-exercise-toggle:focus-visible {
+.bit-sidebar-nav li a:focus-visible,
+.bit-code-copy:focus-visible,
+.bit-exercise-toggle:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
 /* ── Print styles ── */
 @media print {
-  .bit-manipulation-sidebar,
-  .bit-manipulation-progress-bar,
-  .bit-manipulation-exercise-toggle,
-  .bit-manipulation-code-copy,
+  .bit-sidebar,
+  .bit-progress-bar,
+  .bit-exercise-toggle,
+  .bit-code-copy,
   .navbar,
   .footer {
     display: none !important;
   }
 
-  .bit-manipulation-lesson {
+  .bit-lesson {
     break-inside: avoid;
     border: 1px solid #ccc;
   }
 
-  .bit-manipulation-code-block pre {
+  .bit-code-block pre {
     background: #f5f5f5;
     color: #333;
   }
