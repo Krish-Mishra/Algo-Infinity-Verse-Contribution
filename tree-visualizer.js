@@ -255,8 +255,10 @@ document.getElementById('btn-search').addEventListener('click', async () => {
     if (found) {
         statusMsg.innerText = `Found node ${target}!`;
         const el = document.getElementById(`node-${target}`);
-        el.classList.add('found');
-        setTimeout(() => el.classList.remove('found'), 2000);
+        if (el) {
+            el.classList.add('found');
+            setTimeout(() => el.classList.remove('found'), 2000);
+        }
     } else {
         statusMsg.innerText = `Node ${target} not found.`;
     }

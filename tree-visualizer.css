@@ -152,8 +152,8 @@
   padding: 1rem;
   font-size: 0.85rem;
   color: var(--text-secondary);
-  font-family: Fira Code, monospace;
-  word-wrap: break-word;
+  font-family: "Fira Code", monospace;
+  overflow-wrap: break-word;
 }
 
 /* ── Canvas Area ── */
@@ -193,7 +193,7 @@
   align-items: center;
   color: var(--text-primary);
   font-weight: 600;
-  font-family: Orbitron, sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 0.9rem;
   transform: translate(-50%, -50%); /* Center node on coordinates */
   z-index: 2;
