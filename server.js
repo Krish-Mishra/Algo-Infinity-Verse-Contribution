@@ -417,7 +417,19 @@ async function handleApi(req, res, pathname) {
       ? await getUserByEmail(email)
       : (await readUsers()).find((user) => user.email === email);
     if (existing) {
-      return sendJson(res, 409, { error: "An account with this email already exists." });
+      // Normalize response time so a duplicate is indistinguishable from a
+      // real signup by timing — a real signup always runs PBKDF2 before
+      // responding, so we must delay here to match that latency profile.
+      await normalizeAuthDelay();
+      console.warn("[signup] duplicate email attempt", {
+        email,
+        ip: clientId,
+        at: new Date().toISOString(),
+      });
+      // Return a generic 200 that is indistinguishable from a real signup
+      // success so callers cannot enumerate registered email addresses.
+      // No session cookie is issued — the submitter has not authenticated.
+      return sendJson(res, 200, { ok: true });
     }
 
     const user = {
@@ -544,10 +556,6 @@ function resolveStaticPath(pathname) {
     "/php-learning": "php-learning.html",
     "/learning/oop": "oop-learning.html",
     "/oop-learning": "oop-learning.html",
-    "/learning/computer-architecture": "computer-architecture.html",
-    "/computer-architecture": "computer-architecture.html",
-    "/learning/tree-traversal": "tree-traversal.html",
-    "/tree-traversal": "tree-traversal.html",
     "/feedback": "feedback.html",
     "/feedback.html": "feedback.html",
     "/support-page": "support-page/index.html",

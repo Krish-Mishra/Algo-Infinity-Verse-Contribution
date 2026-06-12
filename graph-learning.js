@@ -1,16 +1,17 @@
+console.log("GRAPH JS STARTED");
 /**
- * computer-architecture.js
- * Interactivity for the Computer Architecture Learning page:
+ * graph-learning.js
+ * Interactivity for the Graph Learning page:
  *  - Hero typing animation
- *  - Stats counter animation (uses global animateValue from script.js)
- *  - Sidebar scroll-spy (active link tracking)
- *  - Progress bar (tracks completed topics via localStorage)
- *  - Exercise toggle (show/hide solutions)
+ *  - Stats counter animation
+ *  - Sidebar scroll-spy
+ *  - Progress tracking
+ *  - Exercise toggle
  *  - Copy code button
- *  - Interactive Computer Architecture Quiz
+ *  - Interactive quiz
  */
 
-document.addEventListener("DOMContentLoaded", () => {
+function initializeGraphPage() {
   initHeroTyping();
   initStatsAnimation();
   initExerciseToggles();
@@ -18,22 +19,71 @@ document.addEventListener("DOMContentLoaded", () => {
   initSidebarSpy();
   initProgressTracker();
   initQuiz();
-});
+  initNavbar();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeGraphPage);
+} else {
+  initializeGraphPage();
+}
+
+function initNavbar() {
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  if (!menuToggle || !navLinks) return;
+
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+
+    const icon = menuToggle.querySelector("i");
+    if (icon) {
+      icon.classList.toggle("fa-bars");
+      icon.classList.toggle("fa-times");
+    }
+  });
+  // Dropdown menus
+  document.querySelectorAll(".dropdown-toggle").forEach((toggle) => {
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const parent = toggle.closest(".has-dropdown");
+
+      // close other dropdowns
+      document.querySelectorAll(".has-dropdown").forEach((item) => {
+        if (item !== parent) {
+          item.classList.remove("active");
+        }
+      });
+
+      parent.classList.toggle("active");
+    });
+  });
+
+  window.addEventListener("scroll", () => {
+    const navbar = document.querySelector(".navbar");
+    if (!navbar) return;
+
+    navbar.style.background =
+      window.scrollY > 100 ? "rgba(10, 10, 26, 0.95)" : "rgba(10, 10, 26, 0.8)";
+  });
+}
 
 /* ─────────────────────────────────────────────
    Hero Typing Animation
    ───────────────────────────────────────────── */
 function initHeroTyping() {
-  const el = document.getElementById("typingTextCa");
+  const el = document.getElementById("typingTextGraph");
   if (!el) return;
 
   const words = [
-    "Von Neumann Model",
-    "Fetch-Decode-Execute",
-    "RISC vs CISC Design",
-    "Cache & RAM Hierarchy",
-    "Instruction Pipeline",
-    "System Bus Operations",
+    "Graph Fundamentals",
+    "Directed & Undirected Graphs",
+    "Breadth-First Search (BFS)",
+    "Depth-First Search (DFS)",
+    "Shortest Path Algorithms",
+    "Real-World Graph Applications",
   ];
 
   let wordIdx = 0;
@@ -41,7 +91,7 @@ function initHeroTyping() {
   let isDeleting = false;
 
   const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
+    "(prefers-reduced-motion: reduce)",
   ).matches;
 
   if (prefersReducedMotion) {
@@ -71,10 +121,31 @@ function initHeroTyping() {
       speed = 500;
     }
 
-    requestAnimationFrame(() => setTimeout(tick, speed));
+    setTimeout(tick, speed);
   }
 
   tick();
+}
+
+function animateValue(element) {
+  const target = Number(element.dataset.target);
+  let current = 0;
+
+  const increment = Math.max(1, target / 50);
+
+  function update() {
+    current += increment;
+
+    if (current >= target) {
+      element.textContent = target;
+      return;
+    }
+
+    element.textContent = Math.floor(current);
+    requestAnimationFrame(update);
+  }
+
+  update();
 }
 
 /* ─────────────────────────────────────────────
@@ -95,7 +166,7 @@ function initStatsAnimation() {
         }
       });
     },
-    { threshold: 0.5, rootMargin: "0px 0px -50px 0px" }
+    { threshold: 0.5, rootMargin: "0px 0px -50px 0px" },
   );
 
   statNumbers.forEach((s) => observer.observe(s));
@@ -105,7 +176,7 @@ function initStatsAnimation() {
    Exercise Show/Hide Toggle
    ───────────────────────────────────────────── */
 function initExerciseToggles() {
-  document.querySelectorAll(".ca-exercise-toggle").forEach((btn) => {
+  document.querySelectorAll(".graph-exercise-toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
       const targetId = btn.getAttribute("aria-controls");
       const solution = document.getElementById(targetId);
@@ -122,7 +193,7 @@ function initExerciseToggles() {
    Copy Code Button
    ───────────────────────────────────────────── */
 function initCopyButtons() {
-  document.querySelectorAll(".ca-code-copy").forEach((btn) => {
+  document.querySelectorAll(".graph-code-copy").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const code = btn.getAttribute("data-code");
       if (!code) return;
@@ -159,8 +230,8 @@ function initCopyButtons() {
    Sidebar Scroll-Spy
    ───────────────────────────────────────────── */
 function initSidebarSpy() {
-  const links = document.querySelectorAll(".ca-sidebar-nav a");
-  const lessons = document.querySelectorAll(".ca-lesson");
+  const links = document.querySelectorAll(".graph-sidebar-nav a");
+  const lessons = document.querySelectorAll(".graph-lesson");
   if (!links.length || !lessons.length) return;
 
   const NAV_HEIGHT = 100; // offset for fixed navbar
@@ -192,7 +263,7 @@ function initSidebarSpy() {
       if (id) {
         links.forEach((l) => l.classList.remove("active"));
         const active = document.querySelector(
-          `.ca-sidebar-nav a[href="#${id}"]`
+          `.graph-sidebar-nav a[href="#${id}"]`,
         );
         if (active) active.classList.add("active");
       }
@@ -208,11 +279,11 @@ function initSidebarSpy() {
    Progress Tracker
    ───────────────────────────────────────────── */
 function initProgressTracker() {
-  const STORAGE_KEY = "ca-learning-progress";
-  const TOTAL_TOPICS = 12;
+  const STORAGE_KEY = "graph-learning-progress";
+  const TOTAL_TOPICS = 8;
   const fill = document.getElementById("progressFill");
   const count = document.getElementById("progressCount");
-  const bar = document.querySelector(".ca-progress-bar");
+  const bar = document.querySelector(".graph-progress-bar");
 
   if (!fill || !count) return;
 
@@ -233,7 +304,7 @@ function initProgressTracker() {
 
   updateUI();
 
-  const lessons = document.querySelectorAll(".ca-lesson");
+  const lessons = document.querySelectorAll(".graph-lesson");
   const observer = new IntersectionObserver(
     (entries) => {
       let changed = false;
@@ -247,14 +318,11 @@ function initProgressTracker() {
         }
       });
       if (changed) {
-        localStorage.setItem(
-          STORAGE_KEY,
-          JSON.stringify([...completed])
-        );
+        localStorage.setItem(STORAGE_KEY, JSON.stringify([...completed]));
         updateUI();
       }
     },
-    { threshold: 0.15, rootMargin: "0px 0px -20% 0px" }
+    { threshold: 0.15, rootMargin: "0px 0px -20% 0px" },
   );
 
   lessons.forEach((l) => observer.observe(l));
@@ -271,14 +339,14 @@ function initQuiz() {
   const scorePercent = document.getElementById("quizScorePercent");
 
   const correctAnswers = {
-    q1: "bus",
-    q2: "l1",
-    q3: "cu",
-    q4: "interrupts",
-    q5: "fetch",
+    q1: "b",
+    q2: "b",
+    q3: "b",
+    q4: "b",
+    q5: "a",
   };
 
-  const optionCards = document.querySelectorAll(".ca-quiz-option");
+  const optionCards = document.querySelectorAll(".graph-quiz-option");
   optionCards.forEach((card) => {
     card.addEventListener("click", () => {
       const radio = card.querySelector('input[type="radio"]');
@@ -287,9 +355,11 @@ function initQuiz() {
       radio.checked = true;
 
       const name = radio.getAttribute("name");
-      const parentOptions = document.querySelectorAll(`.ca-quiz-option input[name="${name}"]`);
+      const parentOptions = document.querySelectorAll(
+        `.graph-quiz-option input[name="${name}"]`,
+      );
       parentOptions.forEach((o) => {
-        o.closest(".ca-quiz-option").classList.remove("selected");
+        o.closest(".graph-quiz-option").classList.remove("selected");
       });
 
       card.classList.add("selected");
@@ -303,7 +373,9 @@ function initQuiz() {
       let allAnswered = true;
 
       for (let key in correctAnswers) {
-        const selectedRadio = document.querySelector(`input[name="${key}"]:checked`);
+        const selectedRadio = document.querySelector(
+          `input[name="${key}"]:checked`,
+        );
         if (!selectedRadio) {
           allAnswered = false;
           break;
@@ -321,7 +393,7 @@ function initQuiz() {
 
         radios.forEach((r) => {
           r.disabled = true;
-          const card = r.closest(".ca-quiz-option");
+          const card = r.closest(".graph-quiz-option");
           card.classList.remove("selected");
 
           if (r.value === correctVal) {
@@ -331,7 +403,9 @@ function initQuiz() {
           }
         });
 
-        const selectedRadio = document.querySelector(`input[name="${key}"]:checked`);
+        const selectedRadio = document.querySelector(
+          `input[name="${key}"]:checked`,
+        );
         const feedback = document.getElementById(`feedback-${key}`);
         const explanation = document.getElementById(`explanation-${key}`);
 
@@ -339,12 +413,12 @@ function initQuiz() {
           score++;
           if (feedback) {
             feedback.textContent = "✓ Correct Answer!";
-            feedback.className = "ca-quiz-feedback correct";
+            feedback.className = "graph-quiz-feedback correct";
           }
         } else {
           if (feedback) {
-            feedback.textContent = `✗ Incorrect. Correct: ${correctVal.toUpperCase()}`;
-            feedback.className = "ca-quiz-feedback incorrect";
+            feedback.textContent = "✗ Incorrect Answer.";
+            feedback.className = "graph-quiz-feedback incorrect";
           }
         }
 
@@ -367,21 +441,23 @@ function initQuiz() {
 
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
-      const radios = document.querySelectorAll('.ca-quiz-option input[type="radio"]');
+      const radios = document.querySelectorAll(
+        '.graph-quiz-option input[type="radio"]',
+      );
       radios.forEach((r) => {
         r.checked = false;
         r.disabled = false;
-        const card = r.closest(".ca-quiz-option");
-        card.className = "ca-quiz-option";
+        const card = r.closest(".graph-quiz-option");
+        card.className = "graph-quiz-option";
       });
 
-      const feedbacks = document.querySelectorAll(".ca-quiz-feedback");
+      const feedbacks = document.querySelectorAll(".graph-quiz-feedback");
       feedbacks.forEach((f) => {
         f.textContent = "";
-        f.className = "ca-quiz-feedback";
+        f.className = "graph-quiz-feedback";
       });
 
-      const explanations = document.querySelectorAll(".ca-quiz-explanation");
+      const explanations = document.querySelectorAll(".graph-quiz-explanation");
       explanations.forEach((e) => {
         e.classList.remove("visible");
       });
@@ -392,3 +468,4 @@ function initQuiz() {
     });
   }
 }
+console.log("GRAPH JS FINISHED");

@@ -979,7 +979,284 @@ const dsaTopics = [
       "Word Ladder",
       "Network Delay Time",
     ],
-  },
+
+    dp: [
+        {
+            id: "dp-1",
+            question: "What are the two key properties needed for Dynamic Programming?",
+            options: ["Greedy and Divide & Conquer", "Optimal substructure and overlapping subproblems", "Recursion and memoization", "Iteration and base cases"],
+            correct: 1,
+            explanation: "DP requires optimal substructure (solution contains optimal subsolutions) and overlapping subproblems."
+        },
+        {
+            id: "dp-2",
+            question: "What is memoization in DP?",
+            options: ["Bottom-up tabulation", "Top-down caching of results", "Greedy choice", "Iterative approach"],
+            correct: 1,
+            explanation: "Memoization stores results of expensive function calls to avoid recomputation (top-down DP)."
+        },
+        {
+            id: "dp-3",
+            question: "What is tabulation in DP?",
+            options: ["Top-down recursive memoization", "Bottom-up iterative table filling", "Greedy approach", "Divide and conquer"],
+            correct: 1,
+            explanation: "Tabulation builds DP table iteratively from base cases upward (bottom-up)."
+        },
+        {
+            id: "dp-4",
+            question: "The Fibonacci sequence can be computed using DP in what time complexity?",
+            options: ["O(2^n) naive recursion", "O(n) DP", "O(log n)", "O(1)"],
+            correct: 1,
+            explanation: "DP Fibonacci computes in O(n) by storing previous two values, vs O(2^n) naive recursion."
+        },
+        {
+            id: "dp-5",
+            question: "Which classic DP problem asks: given n stairs, how many ways to reach top taking 1 or 2 steps?",
+            options: ["Coin Change", "Climbing Stairs", "House Robber", "Longest Increasing Subsequence"],
+            correct: 1,
+            explanation: "Climbing Stairs is essentially Fibonacci: ways[n] = ways[n-1] + ways[n-2]."
+        },
+        {
+            id: "dp-6",
+            question: "What is the 'state' in DP?",
+            options: ["Random number", "Set of variables defining subproblem", "Final answer", "Recursion depth"],
+            correct: 1,
+            explanation: "DP state captures parameters that uniquely define a subproblem (e.g., index, remaining capacity)."
+        },
+        {
+            id: "dp-7",
+            question: "Which DP problem involves maximizing sum of non-adjacent houses?",
+            options: ["Knapsack", "House Robber", "Longest Common Subsequence", "Edit Distance"],
+            correct: 1,
+            explanation: "House Robber: cannot rob adjacent houses; dp[i] = max(dp[i-1], dp[i-2] + nums[i])."
+        },
+        {
+            id: "dp-8",
+            question: "What is the time complexity of the classic 0/1 Knapsack DP?",
+            options: ["O(n)", "O(nW) where W=capacity", "O(2^n)", "O(n^2)"],
+            correct: 1,
+            explanation: "0/1 Knapsack DP uses a 2D table of size n x W, giving O(nW) time and space."
+        },
+        {
+            id: "dp-9",
+            question: "Which DP technique finds the longest increasing subsequence in O(n log n)?",
+            options: ["Memoization", "Patience sorting with binary search", "Tabulation", "Recursion"],
+            correct: 1,
+            explanation: "LIS can be optimized using patience sorting approach: maintain tails array, binary search for each element."
+        },
+        {
+            id: "dp-10",
+            question: "What is Edit Distance (Levenshtein distance) about?",
+            options: ["Sorting strings", "Minimum operations to convert one string to another", "Longest common substring", "String compression"],
+            correct: 1,
+            explanation: "Edit distance computes minimum insertions, deletions, substitutions to transform string A into B."
+        }
+    ],
+    greedy: [
+        {
+            id: "greedy-1",
+            question: "What is the main idea behind Greedy Algorithms?",
+            options: [
+                "Solve all subproblems first",
+                "Choose the locally optimal choice at each step",
+                "Use recursion only",
+                "Try every possible solution"
+            ],
+            correct: 1,
+            explanation: "Greedy algorithms make the best local choice at each step hoping to achieve a global optimum."
+        },
+    {
+        id: "greedy-2",
+        question: "Which problem is commonly solved using a Greedy approach?",
+        options: [
+            "Merge Sort",
+            "Activity Selection",
+            "Tower of Hanoi",
+            "Binary Search"
+        ],
+        correct: 1,
+        explanation: "Activity Selection is a classic Greedy Algorithm problem."
+    },
+    {
+        id: "greedy-3",
+        question: "Which Knapsack problem can be solved optimally using Greedy Algorithms?",
+        options: [
+            "0/1 Knapsack",
+            "Fractional Knapsack",
+            "Both",
+            "Neither"
+        ],
+        correct: 1,
+        explanation: "Fractional Knapsack can be solved greedily using value/weight ratio."
+    }
+    ]
+};
+
+// ===== DATA OBJECTS =====
+const dsaTopics = [
+    {
+        id: 1,
+        name: "Arrays",
+        icon: "📊",
+        description: "Learn array operations, manipulations, and common interview problems",
+        difficulty: "Easy-Medium",
+        theory: "Arrays are contiguous memory locations that store elements of the same type. They provide O(1) access time but fixed size.",
+        problems: ["Two Sum", "Maximum Subarray", "Merge Intervals", "Product Except Self", "Spiral Matrix"]
+    },
+    {
+        id: 2,
+        name: "Strings",
+        icon: "🔤",
+        description: "Master string algorithms, pattern matching, and string manipulation",
+        difficulty: "Easy-Medium",
+        theory: "Strings are arrays of characters. Key operations include concatenation, substring search, and pattern matching using algorithms like KMP.",
+        problems: ["Longest Substring Without Repeating", "Valid Parentheses", "Palindrome Partitioning", "String to Integer", "Group Anagrams"]
+    },
+    {
+        id: 3,
+        name: "Linked List",
+        icon: "🔗",
+        description: "Singly, doubly, and circular linked lists with traversal techniques",
+        difficulty: "Medium",
+        theory: "Linked lists are linear data structures where elements are linked using pointers. Allows dynamic size and efficient insertions/deletions.",
+        problems: ["Reverse Linked List", "Detect Cycle", "Merge Two Sorted Lists", "Remove Nth From End", "Intersection of Two Lists"]
+    },
+    {
+        id: 4,
+        name: "Trees",
+        icon: "🌳",
+        description: "Binary trees, BST, traversal algorithms, and tree-based problems",
+        difficulty: "Medium-Hard",
+        theory: "Trees are hierarchical structures. Binary trees have at most two children per node. BST maintains sorted order: left < root < right.",
+        problems: ["Maximum Depth", "Validate BST", "Lowest Common Ancestor", "Serialize/Deserialize", "Path Sum"]
+    },
+    {
+        id: 5,
+        name: "Graphs",
+        icon: "🕸️",
+        description: "Graph representations, traversal (BFS/DFS), shortest paths, and networks",
+        difficulty: "Hard",
+        theory: "Graphs consist of vertices connected by edges. Representations: adjacency list/matrix. Traversals: BFS (level-order) and DFS (depth-first).",
+        problems: ["Clone Graph", "Number of Islands", "Course Schedule", "Word Ladder", "Network Delay Time"]
+    },
+    {
+        id: 6,
+        name: "Dynamic Programming",
+        icon: "🎯",
+        description: "Recursion, memoization, tabulation, and optimization problems",
+        difficulty: "Hard",
+        theory: "DP breaks problems into overlapping subproblems. Stores solutions to avoid recomputation. Approaches: top-down (memoization) and bottom-up (tabulation).",
+        problems: ["Climbing Stairs", "Coin Change", "Longest Increasing Subsequence", "Edit Distance", "House Robber"]
+    },
+    {
+        id: 7,
+        name: "Greedy Algorithms",
+        icon: "💡",
+        description: "Learn greedy strategy, optimization techniques, and common real-world applications.",
+        difficulty: "Medium",
+        theory: `
+            Introduction:
+            Greedy Algorithms build a solution step by step by always choosing the locally optimal choice at each stage.
+
+            Greedy Approach:
+            • Choose the best available option.
+            • Add it to the solution.
+            • Never reconsider previous choices.
+            • Repeat until the solution is complete.
+
+            Advantages:
+            • Easy to understand and implement.
+            • Fast execution.
+            • Memory efficient.
+            • Useful for optimization problems.
+
+            Limitations:
+            • Does not always guarantee the optimal solution.
+            • Works only for problems with the greedy-choice property.
+            • Requires proof of correctness.
+
+            Common Problems:
+            • Activity Selection
+            • Fractional Knapsack
+            • Huffman Coding
+            • Job Sequencing
+            • Prim's Algorithm
+            • Kruskal's Algorithm
+
+            Practice Exercises:
+            1. Solve Activity Selection Problem.
+            2. Implement Fractional Knapsack.
+            3. Implement Huffman Coding.
+            4. Solve Job Sequencing Problem.
+            5. Find MST using Kruskal's Algorithm.
+            `,
+            problems: [
+                "Activity Selection",
+                "Fractional Knapsack",
+                "Huffman Coding",
+                "Job Sequencing",
+                "Prim's Algorithm",
+                "Kruskal's Algorithm"
+            ]
+    }
+];
+
+const practiceProblems = [
+    { id: 1, title: "Two Sum", difficulty: "easy", tags: ["Arrays", "Hash Table"], acceptance: "48.2%", category: "arrays" },
+    { id: 2, title: "Valid Parentheses", difficulty: "easy", tags: ["Strings", "Stack"], acceptance: "40.2%", category: "strings" },
+    { id: 3, title: "Merge Two Sorted Lists", difficulty: "easy", tags: ["Linked List", "Recursion"], acceptance: "58.5%", category: "linkedlist" },
+    { id: 4, title: "Maximum Subarray", difficulty: "medium", tags: ["Arrays", "Divide & Conquer"], acceptance: "46.2%", category: "arrays" },
+    { id: 5, title: "LRU Cache", difficulty: "medium", tags: ["Design", "Hash Table"], acceptance: "37.5%", category: "arrays" },
+    { id: 6, title: "Clone Graph", difficulty: "medium", tags: ["Graphs", "DFS", "BFS"], acceptance: "43.2%", category: "graphs" },
+    { id: 7, title: "Longest Increasing Subsequence", difficulty: "hard", tags: ["DP", "Binary Search"], acceptance: "42.1%", category: "dp" },
+    { id: 8, title: "Word Ladder", difficulty: "hard", tags: ["Graphs", "BFS"], acceptance: "31.4%", category: "graphs" },
+    { id: 9, title: "Trapping Rain Water", difficulty: "hard", tags: ["Arrays", "Two Pointers"], acceptance: "48.7%", category: "arrays" },
+    { id: 10, title: "Reverse Linked List", difficulty: "easy", tags: ["Linked List"], acceptance: "72.1%", category: "linkedlist" },
+    { id: 11, title: "Invert Binary Tree", difficulty: "easy", tags: ["Trees", "DFS"], acceptance: "68.5%", category: "trees" },
+    { id: 12, title: "Validate BST", difficulty: "medium", tags: ["Trees", "Recursion"], acceptance: "28.4%", category: "trees" },
+    { id: 13, title: "Number of Islands", difficulty: "medium", tags: ["Graphs", "DFS"], acceptance: "54.8%", category: "graphs" },
+    { id: 14, title: "House Robber", difficulty: "medium", tags: ["DP", "Arrays"], acceptance: "42.3%", category: "dp" },
+    { id: 15, title: "Course Schedule", difficulty: "medium", tags: ["Graphs", "Topological Sort"], acceptance: "44.7%", category: "graphs" },
+    {
+    id: 16,
+    title: "Activity Selection",
+    difficulty: "medium",
+    tags: ["Greedy", "Scheduling"],
+    acceptance: "52.4%",
+    category: "greedy"
+},
+{
+    id: 17,
+    title: "Fractional Knapsack",
+    difficulty: "medium",
+    tags: ["Greedy", "Optimization"],
+    acceptance: "58.7%",
+    category: "greedy"
+},
+{
+    id: 18,
+    title: "Job Sequencing with Deadlines",
+    difficulty: "hard",
+    tags: ["Greedy", "Scheduling"],
+    acceptance: "41.2%",
+    category: "greedy"
+},
+{
+    id: 19,
+    title: "Huffman Coding",
+    difficulty: "hard",
+    tags: ["Greedy", "Trees"],
+    acceptance: "46.8%",
+    category: "greedy"
+},
+{
+    id: 20,
+    title: "Minimum Spanning Tree",
+    difficulty: "medium",
+    tags: ["Greedy", "Graphs"],
+    acceptance: "55.1%",
+    category: "greedy"
+},
   {
     id: 6,
     name: "Dynamic Programming",
@@ -1043,6 +1320,35 @@ const dsaTopics = [
       "House Robber",
       "Fibonacci Number",
     ],
+  },
+  {
+    id: 7,
+    name: "Matrix",
+    icon: "🔢",
+    description: "2D arrays, traversal techniques, rotations, and grid-based interview problems",
+    difficulty: "Medium",
+    theory: `
+    <h3 style="color:var(--accent); margin-bottom:1rem;">🔢 Matrix — 2D Array Mastery</h3>
+    <p style="margin-bottom:1rem;">A matrix is a <strong>2D grid of elements</strong> accessed by row and column in O(1) time.</p>
+    <h4 style="color:var(--primary); margin:1rem 0 0.5rem;">⚡ Key Operations & Complexity</h4>
+    <table style="width:100%; border-collapse:collapse; margin-bottom:1rem; font-size:0.9rem;">
+      <tr style="background:var(--dark-card);"><th style="padding:0.5rem 1rem; text-align:left; border:1px solid var(--glass-border);">Operation</th><th style="padding:0.5rem 1rem; text-align:left; border:1px solid var(--glass-border);">Time</th></tr>
+      <tr><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">Access element</td><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border); color:#22c55e;">O(1) ✅</td></tr>
+      <tr style="background:var(--dark-card);"><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">Linear traversal</td><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">O(M×N)</td></tr>
+      <tr><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">Transpose / Rotate</td><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">O(N²)</td></tr>
+      <tr style="background:var(--dark-card);"><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">Search (sorted matrix)</td><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border); color:#22c55e;">O(M+N) ✅</td></tr>
+    </table>
+    <h4 style="color:var(--primary); margin:1rem 0 0.5rem;">🎯 Must-Know Interview Patterns</h4>
+    <ul style="list-style:none; padding:0; margin-bottom:1rem;">
+      <li style="padding:0.3rem 0;">→ <strong>Spiral Traversal</strong> — boundary pointer shrinking</li>
+      <li style="padding:0.3rem 0;">→ <strong>BFS/DFS on Grid</strong> — island counting, flood fill</li>
+      <li style="padding:0.3rem 0;">→ <strong>Transpose + Reverse</strong> — in-place 90° rotation</li>
+      <li style="padding:0.3rem 0;">→ <strong>Top-right corner search</strong> — O(M+N) sorted matrix search</li>
+    </ul>
+    <h4 style="color:var(--primary); margin:1rem 0 0.5rem;">🏆 Real Interview Questions from FAANG</h4>
+    <p style="color:var(--text-secondary);">Spiral Matrix (Amazon), Rotate Image (Google), Number of Islands (Microsoft), Search a 2D Matrix (Meta)</p>
+    `,
+    problems: ["Spiral Matrix", "Rotate Image", "Number of Islands", "Set Matrix Zeroes", "Search a 2D Matrix"],
   },
 ];
 
@@ -1877,7 +2183,13 @@ function initNavbar() {
 // ===== HERO SECTION =====
 function initHeroSection() {
   // Typing animation
-  const typingElement = document.getElementById("typingText");
+  const typingElement =
+    document.getElementById("typingText") ||
+    document.getElementById("typingTextGraph");
+  if (!typingElement) {
+    console.error("typingText element not found");
+    return;
+  }
   const texts = [
     "Arrays",
     "Linked Lists",
@@ -2121,6 +2433,11 @@ function initTopicOfTheDay() {
 
 function initTopicsSection() {
   const topicsGrid = document.querySelector(".topics-grid");
+  if (!topicsGrid) {
+    console.warn("topics-grid not found");
+    return;
+  }
+
   topicsGrid.innerHTML = "";
   dsaTopics.forEach((topic, index) => {
     const card = document.createElement("div");
@@ -2207,7 +2524,7 @@ function getQuizTopicKey(topic) {
     "dynamic programming": "dp",
   };
 
-  return keyMap[name] || toKnownKey(name) || name.replace(/\s+/g, "");
+  return keyMap[name] || toKnownKey(name) || null;
 }
 
 
@@ -2221,6 +2538,7 @@ function initQuizSection() {
 
     dsaTopics.forEach((topic, index) => {
       const topicKey = getQuizTopicKey(topic);
+      if (!topicKey) return;
       const card = document.createElement("div");
       card.className = "quiz-card animate-in";
       card.style.animationDelay = `${index * 0.1}s`;
@@ -3283,6 +3601,7 @@ function initRoadmap() {
 
   // 3. Render original stages overview
   const progressBar = document.getElementById("roadmapProgress");
+  if (!progressBar) return;
   const stages = document.querySelectorAll(".stage");
   if (progressBar && stages.length >= 3) {
     const totalProblems = practiceProblems.length;
@@ -3881,11 +4200,21 @@ function updateLevelProgress() {
 
 // ===== DASHBOARD =====
 function initDashboard() {
+  const completedProblems = document.getElementById("completedProblems");
+
+  if (!completedProblems) return;
   updateDashboard();
   updateProfile();
 }
 
 function updateDashboard() {
+  const completedProblems = document.getElementById("completedProblems");
+  const currentStreak = document.getElementById("currentStreak");
+  const totalXP = document.getElementById("totalXP");
+  if (!completedProblems || !currentStreak || !totalXP) return;
+  completedProblems.textContent = userProgress.completedProblems.length;
+  currentStreak.textContent = userProgress.streak;
+  totalXP.textContent = userProgress.xp;
   document.getElementById("completedProblems").textContent =
     userProgress.completedProblems.length;
   document.getElementById("currentStreak").textContent = userProgress.streak;
@@ -4344,6 +4673,11 @@ function showNotification(message, type = "info") {
 }
 
 function updateXPBar() {
+  const xpBar = document.getElementById("xpBar");
+  const xpText = document.getElementById("xpText");
+
+  if (!xpBar || !xpText) return;
+
   const levels = [0, 1000, 2500, 5000, 10000, 20000, 50000, 100000];
   const currentLevel = userProgress.level;
   const currentLevelXP = levels[currentLevel - 1] || 0;
@@ -4353,10 +4687,8 @@ function updateXPBar() {
     ((userProgress.xp - currentLevelXP) / (nextLevelXP - currentLevelXP)) * 100;
 
   setTimeout(() => {
-    document.getElementById("xpBar").style.width =
-      `${Math.min(xpProgress, 100)}%`;
-    document.getElementById("xpText").textContent =
-      `${userProgress.xp} / ${nextLevelXP} XP`;
+    xpBar.style.width = `${Math.min(xpProgress, 100)}%`;
+    xpText.textContent = `${userProgress.xp} / ${nextLevelXP} XP`;
   }, 300);
 }
 
@@ -4371,6 +4703,9 @@ function initChatbot() {
   const send = document.getElementById("chatbotSend");
   const quickQs = document.querySelectorAll(".quick-q");
 
+  if (!toggle || !windowEl || !close || !input || !send) {
+    return;
+  }
   toggle.addEventListener("click", () => {
     windowEl.classList.toggle("hidden");
     toggle.querySelector(".chatbot-badge").style.display = "none";
