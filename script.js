@@ -1763,7 +1763,6 @@ let currentProblem = null;
 document.addEventListener("DOMContentLoaded", () => {
 
   // Apply saved theme only after DOM is ready to avoid touching document.body too early
-  applySavedTheme();
 
   loadUserData();
   initLoadingScreen();
@@ -1779,7 +1778,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initDailyChallenge();
   initChatbot();
   initProfile();
-  initDarkMode();
   initNewsletterValidation();
   initScrollEffects();
   initFooterCurrentDate();
@@ -1924,7 +1922,6 @@ function initNavbar() {
     });
   }
 
-  // Dropdown functionality
   const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
   const isMobile = () => window.matchMedia("(max-width: 1024px)").matches;
 
@@ -1948,14 +1945,12 @@ function initNavbar() {
       }, 250);
     };
 
-    // Desktop: hover to open
     parent.addEventListener("mouseenter", () => { if (!isMobile()) showMenu(); });
     parent.addEventListener("mouseleave", () => { if (!isMobile()) hideMenu(); });
     toggle.addEventListener("focus", () => { if (!isMobile()) showMenu(); });
     menu.addEventListener("focusin", () => { if (!isMobile()) showMenu(); });
     parent.addEventListener("focusout", () => { if (!isMobile()) hideMenu(); });
 
-    // Mobile: click to toggle
     toggle.addEventListener("click", (e) => {
       if (isMobile()) {
         e.preventDefault();
@@ -1965,7 +1960,6 @@ function initNavbar() {
       }
     });
 
-    // Close dropdown on item click (mobile)
     menu.querySelectorAll(".dropdown-item").forEach((item) => {
       item.addEventListener("click", () => {
         if (isMobile()) {
@@ -1976,7 +1970,6 @@ function initNavbar() {
     });
   });
 
-  // Reset open state on resize
   window.addEventListener("resize", () => {
     if (!isMobile()) {
       if (navLinks.classList.contains("active")) {
@@ -1988,18 +1981,6 @@ function initNavbar() {
       dropdownToggles.forEach((toggle) => {
         toggle.setAttribute("aria-expanded", "false");
       });
-    }
-  });
-
-  // Scroll effect
-  window.addEventListener("scroll", () => {
-    const navbar = document.querySelector(".navbar");
-    if (navbar) {
-      if (window.scrollY > 100) {
-        navbar.style.background = "rgba(10, 10, 26, 0.95)";
-      } else {
-        navbar.style.background = "rgba(10, 10, 26, 0.85)";
-      }
     }
   });
 }
@@ -4672,38 +4653,6 @@ function initScrollEffects() {
     .forEach((el) => {
       observer.observe(el);
     });
-}
-
-// ===== DARK MODE =====
-
-function applySavedTheme() {
-  const savedMode = localStorage.getItem("darkMode");
-
-  if (savedMode === "light") {
-    document.body.classList.add("light-mode");
-  }
-}
-
-function initDarkMode() {
-  const toggle = document.getElementById("darkModeToggle");
-  if (!toggle) return;
-  const icon = toggle.querySelector("i");
-
-  // Check saved preference
-  const savedMode = localStorage.getItem("darkMode");
-  if (savedMode === "light") {
-    document.body.classList.add("light-mode");
-    icon.classList.remove("fa-moon");
-    icon.classList.add("fa-sun");
-  }
-
-  toggle.addEventListener("click", () => {
-    document.body.classList.toggle("light-mode");
-    const isLight = document.body.classList.contains("light-mode");
-    icon.classList.toggle("fa-moon");
-    icon.classList.toggle("fa-sun");
-    localStorage.setItem("darkMode", isLight ? "light" : "dark");
-  });
 }
 
 // ===== UTILITIES =====
