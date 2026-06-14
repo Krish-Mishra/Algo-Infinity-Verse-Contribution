@@ -377,14 +377,14 @@ const quizQuestions = {
       id: "trees-4",
       question: "What property must a Binary Search Tree (BST) satisfy?",
       options: [
-        "All left descendants <= node < all right descendants",
+        "All left descendants ≤ node < all right descendants",
         "All levels fully filled",
         "No cycles",
         "All nodes have two children",
       ],
       correct: 0,
       explanation:
-        "BST invariant: left subtree values <= node value < right subtree values.",
+        "BST invariant: left subtree values ≤ node value < right subtree values.",
     },
     {
       id: "trees-5",
@@ -445,7 +445,7 @@ const quizQuestions = {
       question: "What does it mean for a tree to be 'balanced'?",
       options: [
         "All leaf nodes at same level",
-        "Height difference of subtrees <= 1 for every node",
+        "Height difference of subtrees ≤ 1 for every node",
         "No cycles",
         "All nodes have 0 or 2 children",
       ],
@@ -1028,7 +1028,7 @@ const dsaTopics = [
 <ul style="list-style:none; padding:0; margin-bottom:1rem;">
   <li style="padding:0.3rem 0;">• Start with brute force → add memoization → optimize</li>
   <li style="padding:0.3rem 0;">• Draw recursion tree to spot overlapping subproblems</li>
-  <li style="padding:0.3rem 0;">• Most 2D DP can reduce space from O(n^2) to O(n)</li>
+  <li style="padding:0.3rem 0;">• Most 2D DP can reduce space from O(n²) to O(n)</li>
   <li style="padding:0.3rem 0;">• If you see "minimum/maximum/count ways" → think DP!</li>
 </ul>
 
@@ -1058,7 +1058,7 @@ const dsaTopics = [
       <tr style="background:var(--dark-card);"><th style="padding:0.5rem 1rem; text-align:left; border:1px solid var(--glass-border);">Operation</th><th style="padding:0.5rem 1rem; text-align:left; border:1px solid var(--glass-border);">Time</th></tr>
       <tr><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">Access element</td><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border); color:#22c55e;">O(1) ✅</td></tr>
       <tr style="background:var(--dark-card);"><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">Linear traversal</td><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">O(M×N)</td></tr>
-      <tr><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">Transpose / Rotate</td><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">O(N^2)</td></tr>
+      <tr><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">Transpose / Rotate</td><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">O(N²)</td></tr>
       <tr style="background:var(--dark-card);"><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border);">Search (sorted matrix)</td><td style="padding:0.5rem 1rem; border:1px solid var(--glass-border); color:#22c55e;">O(M+N) ✅</td></tr>
     </table>
     <h4 style="color:var(--primary); margin:1rem 0 0.5rem;">🎯 Must-Know Interview Patterns</h4>
@@ -1086,8 +1086,8 @@ const practiceProblems = [
     description:
       "Given an array of integers nums and an integer target, return indices of the two numbers that add up to target. You may assume exactly one solution exists, and you may not use the same element twice. Return the answer in any order.",
     constraints: [
-      "2 <= nums.length <= 10^4",
-      "-10^9 <= nums[i] <= 10^9",
+      "2 ≤ nums.length ≤ 10⁴",
+      "-10⁹ ≤ nums[i] ≤ 10⁹",
       "Only one valid answer exists",
     ],
     followUp: "Can you solve it in O(n) time complexity?",
@@ -1102,7 +1102,7 @@ const practiceProblems = [
     description:
       "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. A string is valid if every open bracket is closed by the same type of bracket in the correct order.",
     constraints: [
-      "1 <= s.length <= 10^4",
+      "1 ≤ s.length ≤ 10⁴",
       "s consists of parentheses only '()[]{}'",
     ],
     followUp: "Can you solve it in O(n) time and O(n) space?",
@@ -1114,6 +1114,14 @@ const practiceProblems = [
     tags: ["Linked List", "Recursion"],
     acceptance: "58.5%",
     category: "linkedlist",
+    description:
+      "You are given the heads of two sorted linked lists list1 and list2. Merge the two lists into one sorted list by splicing together the nodes of the first two lists, and return the head of the merged linked list.",
+    constraints: [
+      "The number of nodes in both lists is in the range [0, 50]",
+      "-100 ≤ Node.val ≤ 100",
+      "Both list1 and list2 are sorted in non-decreasing order",
+    ],
+    followUp: "Can you solve it iteratively using O(1) extra space, and also recursively?",
   },
   {
     id: 4,
@@ -1122,6 +1130,13 @@ const practiceProblems = [
     tags: ["Arrays", "Divide & Conquer"],
     acceptance: "46.2%",
     category: "arrays",
+    description:
+      "Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum, and return its sum.",
+    constraints: [
+      "1 ≤ nums.length ≤ 10⁵",
+      "-10⁴ ≤ nums[i] ≤ 10⁴",
+    ],
+    followUp: "Can you solve it in O(n) time using Kadane's Algorithm?",
   },
   {
     id: 5,
@@ -1130,6 +1145,14 @@ const practiceProblems = [
     tags: ["Design", "Hash Table"],
     acceptance: "37.5%",
     category: "arrays",
+    description:
+      "Design a data structure that follows the constraints of a Least Recently Used (LRU) cache. Implement get(key) and put(key, value) operations. When the cache reaches its capacity, it should invalidate the least recently used item before inserting a new item.",
+    constraints: [
+      "1 ≤ capacity ≤ 3000",
+      "0 ≤ key, value ≤ 10⁴",
+      "At most 2 × 10⁵ calls will be made to get and put",
+    ],
+    followUp: "Can you implement both get and put in O(1) time complexity?",
   },
   {
     id: 6,
@@ -1138,6 +1161,15 @@ const practiceProblems = [
     tags: ["Graphs", "DFS", "BFS"],
     acceptance: "43.2%",
     category: "graphs",
+    description:
+      "Given a reference to a node in a connected undirected graph, return a deep copy (clone) of the graph. Each node in the graph contains a value and a list of its neighbors.",
+    constraints: [
+      "The number of nodes in the graph is in the range [0, 100]",
+      "1 ≤ Node.val ≤ 100",
+      "Node.val is unique for each node",
+      "There are no repeated edges and no self-loops",
+    ],
+    followUp: "Can you solve it using both BFS and DFS approaches?",
   },
   {
     id: 7,
@@ -1146,6 +1178,13 @@ const practiceProblems = [
     tags: ["DP", "Binary Search"],
     acceptance: "42.1%",
     category: "dp",
+    description:
+      "Given an integer array nums, return the length of the longest strictly increasing subsequence.",
+    constraints: [
+      "1 ≤ nums.length ≤ 2500",
+      "-10⁴ ≤ nums[i] ≤ 10⁴",
+    ],
+    followUp: "Can you improve from O(n²) DP to O(n log n) using binary search (patience sorting)?",
   },
   {
     id: 8,
@@ -1154,6 +1193,15 @@ const practiceProblems = [
     tags: ["Graphs", "BFS"],
     acceptance: "31.4%",
     category: "graphs",
+    description:
+      "Given two words, beginWord and endWord, and a dictionary wordList, return the number of words in the shortest transformation sequence from beginWord to endWord, such that only one letter can be changed at a time and each transformed word must exist in wordList. Return 0 if no such sequence exists.",
+    constraints: [
+      "1 ≤ beginWord.length ≤ 10",
+      "endWord.length == beginWord.length",
+      "1 ≤ wordList.length ≤ 5000",
+      "All words consist of lowercase English letters",
+    ],
+    followUp: "Can you find ALL shortest transformation sequences (Word Ladder II)?",
   },
   {
     id: 9,
@@ -1162,6 +1210,13 @@ const practiceProblems = [
     tags: ["Arrays", "Two Pointers"],
     acceptance: "48.7%",
     category: "arrays",
+    description:
+      "Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.",
+    constraints: [
+      "1 ≤ height.length ≤ 2 × 10⁴",
+      "0 ≤ height[i] ≤ 10⁵",
+    ],
+    followUp: "Can you solve it in O(n) time and O(1) space using the two-pointer technique?",
   },
   {
     id: 10,
@@ -1170,6 +1225,13 @@ const practiceProblems = [
     tags: ["Linked List"],
     acceptance: "72.1%",
     category: "linkedlist",
+    description:
+      "Given the head of a singly linked list, reverse the list, and return the reversed list's head.",
+    constraints: [
+      "The number of nodes in the list is in the range [0, 5000]",
+      "-5000 ≤ Node.val ≤ 5000",
+    ],
+    followUp: "Can you solve it both iteratively and recursively?",
   },
   {
     id: 11,
@@ -1178,6 +1240,13 @@ const practiceProblems = [
     tags: ["Trees", "DFS"],
     acceptance: "68.5%",
     category: "trees",
+    description:
+      "Given the root of a binary tree, invert the tree, and return its root. Inverting means swapping the left and right children of every node.",
+    constraints: [
+      "The number of nodes is in the range [0, 100]",
+      "-100 ≤ Node.val ≤ 100",
+    ],
+    followUp: "Can you solve it both recursively and iteratively using a queue or stack?",
   },
   {
     id: 12,
@@ -1186,6 +1255,13 @@ const practiceProblems = [
     tags: ["Trees", "Recursion"],
     acceptance: "28.4%",
     category: "trees",
+    description:
+      "Given the root of a binary tree, determine if it is a valid binary search tree (BST). A valid BST is defined as: the left subtree of a node contains only nodes with keys less than the node's key, the right subtree only contains nodes with keys greater than the node's key, and both left and right subtrees must also be binary search trees.",
+    constraints: [
+      "The number of nodes is in the range [1, 10⁴]",
+      "-2³¹ ≤ Node.val ≤ 2³¹ - 1",
+    ],
+    followUp: "Can you solve it without recursion, e.g. using iterative inorder traversal or Morris Traversal?",
   },
   {
     id: 13,
@@ -1194,6 +1270,13 @@ const practiceProblems = [
     tags: ["Graphs", "DFS"],
     acceptance: "54.8%",
     category: "graphs",
+    description:
+      "Given an m x n 2D binary grid which represents a map of '1's (land) and '0's (water), return the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.",
+    constraints: [
+      "1 ≤ m, n ≤ 300",
+      "grid[i][j] is '0' or '1'",
+    ],
+    followUp: "Can you solve it using both DFS and Union-Find (Disjoint Set Union)?",
   },
   {
     id: 14,
@@ -1202,6 +1285,13 @@ const practiceProblems = [
     tags: ["DP", "Arrays"],
     acceptance: "42.3%",
     category: "dp",
+    description:
+      "You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, and adjacent houses have security systems connected — if two adjacent houses are broken into on the same night, the alarm will go off. Given an integer array nums representing the amount of money in each house, return the maximum amount of money you can rob without robbing two adjacent houses.",
+    constraints: [
+      "1 ≤ nums.length ≤ 100",
+      "0 ≤ nums[i] ≤ 400",
+    ],
+    followUp: "What if the houses are arranged in a circle, where the first and last houses are adjacent? (House Robber II)",
   },
   {
     id: 15,
@@ -1210,6 +1300,15 @@ const practiceProblems = [
     tags: ["Graphs", "Topological Sort"],
     acceptance: "44.7%",
     category: "graphs",
+    description:
+      "There are numCourses courses labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai. Return true if you can finish all courses, otherwise return false.",
+    constraints: [
+      "1 ≤ numCourses ≤ 2000",
+      "0 ≤ prerequisites.length ≤ 5000",
+      "prerequisites[i].length == 2",
+      "0 ≤ ai, bi < numCourses",
+    ],
+    followUp: "Can you return the actual valid course order using topological sort (Course Schedule II)?",
   },
   {
     id: 16,
@@ -1221,8 +1320,8 @@ const practiceProblems = [
     description:
       "Given an array prices where prices[i] is the price of a given stock on the iᵗʰ day, return the maximum profit you can achieve by choosing a single day to buy one stock and choosing a different day in the future to sell that stock. If no profit is possible, return 0.",
     constraints: [
-      "1 <= prices.length <= 10^5",
-      "0 <= prices[i] <= 10^4",
+      "1 ≤ prices.length ≤ 10⁵",
+      "0 ≤ prices[i] ≤ 10⁴",
     ],
     followUp: "Can you solve it in O(n) time and O(1) space?",
   },
@@ -1236,8 +1335,8 @@ const practiceProblems = [
     description:
       "Given an integer array nums, move all 0s to the end of it while maintaining the relative order of the non-zero elements. You must do this in-place without making a copy of the array.",
     constraints: [
-      "1 <= nums.length <= 10^4",
-      "-2^31 <= nums[i] <= 2^31 - 1",
+      "1 ≤ nums.length ≤ 10⁴",
+      "−2³¹ ≤ nums[i] ≤ 2³¹ − 1",
     ],
     followUp: "Can you minimize the total number of operations?",
   },
@@ -1251,7 +1350,7 @@ const practiceProblems = [
     description:
       "Given two strings s and t, return true if t is an anagram of s, and false otherwise. An anagram is a word or phrase formed by rearranging the letters of a different word or phrase, using all the original letters exactly once.",
     constraints: [
-      "1 <= s.length, t.length <= 5 × 10^4",
+      "1 ≤ s.length, t.length ≤ 5 × 10⁴",
       "s and t consist of lowercase English letters only",
     ],
     followUp: "What if the inputs contain Unicode characters? How would you adapt your solution?",
@@ -1266,8 +1365,8 @@ const practiceProblems = [
     description:
       "Given a non-empty array of integers nums, every element appears twice except for one. Find that single one. You must implement a solution with O(n) time complexity and O(1) space complexity.",
     constraints: [
-      "1 <= nums.length <= 3 × 10^4",
-      "-3 × 10^4 <= nums[i] <= 3 × 10^4",
+      "1 ≤ nums.length ≤ 3 × 10⁴",
+      "-3 × 10⁴ ≤ nums[i] ≤ 3 × 10⁴",
       "Each element appears exactly twice except for one element which appears exactly once",
     ],
     followUp: "Can you solve it without using extra memory, using XOR bit manipulation?",
@@ -1282,8 +1381,8 @@ const practiceProblems = [
     description:
       "Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique, and the result can be returned in any order.",
     constraints: [
-      "1 <= nums1.length, nums2.length <= 1000",
-      "0 <= nums1[i], nums2[i] <= 1000",
+      "1 ≤ nums1.length, nums2.length ≤ 1000",
+      "0 ≤ nums1[i], nums2[i] ≤ 1000",
       "Result must contain only unique elements",
     ],
     followUp: "What if the arrays are already sorted? What if one array is much larger than the other?",
@@ -1298,8 +1397,8 @@ const practiceProblems = [
     description:
       "Given an array of integers nums, return true if it is sorted in non-decreasing order, and false otherwise.",
     constraints: [
-      "1 <= nums.length <= 10^4",
-      "-10^9 <= nums[i] <= 10^9",
+      "1 ≤ nums.length ≤ 10⁴",
+      "−10⁹ ≤ nums[i] ≤ 10⁹",
     ],
     followUp: "Can you solve it in O(n) time complexity and O(1) space complexity?",
   },
@@ -1313,7 +1412,7 @@ const practiceProblems = [
     description:
       "Given n, return the nth Fibonacci number.",
     constraints: [
-      "0 <= n <= 30",
+      "0 ≤ n ≤ 30",
     ],
 followUp: "Can you solve it using recursion, memoization, and bottom-up tabulation?",
   },
@@ -1326,9 +1425,9 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     category: "arrays",
     description: "Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.",
     constraints: [
-      "1 <= intervals.length <= 10^4",
+      "1 ≤ intervals.length ≤ 10⁴",
       "intervals[i].length == 2",
-      "0 <= starti <= endi <= 10^4",
+      "0 ≤ starti ≤ endi ≤ 10⁴",
     ],
     followUp: "Can you solve it in O(n log n) time?",
   },
@@ -1341,8 +1440,8 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     category: "arrays",
     description: "Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i]. You must solve it without using the division operation and in O(n) time.",
     constraints: [
-      "2 <= nums.length <= 10^5",
-      "-30 <= nums[i] <= 30",
+      "2 ≤ nums.length ≤ 10⁵",
+      "-30 ≤ nums[i] ≤ 30",
       "The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer",
     ],
     followUp: "Can you solve it in O(1) extra space (excluding output array)?",
@@ -1358,8 +1457,8 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     constraints: [
       "m == matrix.length",
       "n == matrix[0].length",
-      "1 <= m, n <= 10",
-      "-100 <= matrix[i][j] <= 100",
+      "1 ≤ m, n ≤ 10",
+      "-100 ≤ matrix[i][j] ≤ 100",
     ],
     followUp: "Can you solve it without using extra space?",
   },
@@ -1372,7 +1471,7 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     category: "strings",
     description: "Given a string s, find the length of the longest substring without repeating characters.",
     constraints: [
-      "0 <= s.length <= 5 × 10^4",
+      "0 ≤ s.length ≤ 5 × 10⁴",
       "s consists of English letters, digits, symbols and spaces",
     ],
     followUp: "Can you solve it in O(n) using sliding window?",
@@ -1386,8 +1485,8 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     category: "strings",
     description: "Given an array of strings strs, group the anagrams together. You can return the answer in any order.",
     constraints: [
-      "1 <= strs.length <= 10^4",
-      "0 <= strs[i].length <= 100",
+      "1 ≤ strs.length ≤ 10⁴",
+      "0 ≤ strs[i].length ≤ 100",
       "strs[i] consists of lowercase English letters",
     ],
     followUp: "Can you solve it without sorting each string?",
@@ -1401,8 +1500,8 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     category: "linkedlist",
     description: "Given head, the head of a linked list, determine if the linked list has a cycle in it. Return true if there is a cycle, otherwise return false.",
     constraints: [
-      "The number of nodes is in range [0, 10^4]",
-      "-10^5 <= Node.val <= 10^5",
+      "The number of nodes is in range [0, 10⁴]",
+      "-10⁵ ≤ Node.val ≤ 10⁵",
     ],
     followUp: "Can you solve it using Floyd's cycle detection algorithm in O(1) space?",
   },
@@ -1416,9 +1515,9 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     description: "Given the head of a linked list, remove the nth node from the end of the list and return its head.",
     constraints: [
       "The number of nodes in the list is sz",
-      "1 <= sz <= 30",
-      "0 <= Node.val <= 100",
-      "1 <= n <= sz",
+      "1 ≤ sz ≤ 30",
+      "0 ≤ Node.val ≤ 100",
+      "1 ≤ n ≤ sz",
     ],
     followUp: "Can you solve it in one pass using two pointers?",
   },
@@ -1433,7 +1532,7 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     constraints: [
       "The number of nodes of listA is in the m",
       "The number of nodes of listB is in the n",
-      "1 <= m, n <= 3 × 10^4",
+      "1 ≤ m, n ≤ 3 × 10⁴",
     ],
     followUp: "Can you solve it in O(m+n) time and O(1) space?",
   },
@@ -1446,8 +1545,8 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     category: "trees",
     description: "Given the root of a binary tree, return its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.",
     constraints: [
-      "The number of nodes is in range [0, 10^4]",
-      "-100 <= Node.val <= 100",
+      "The number of nodes is in range [0, 10⁴]",
+      "-100 ≤ Node.val ≤ 100",
     ],
     followUp: "Can you solve it both recursively and iteratively using BFS?",
   },
@@ -1460,8 +1559,8 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     category: "trees",
     description: "Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST. The LCA is defined as the lowest node that has both p and q as descendants.",
     constraints: [
-      "The number of nodes is in range [2, 10^5]",
-      "-10^9 <= Node.val <= 10^9",
+      "The number of nodes is in range [2, 10⁵]",
+      "-10⁹ ≤ Node.val ≤ 10⁹",
       "All Node.val are unique",
     ],
     followUp: "Can you solve it for a general binary tree (not just BST)?",
@@ -1476,8 +1575,8 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     description: "Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.",
     constraints: [
       "The number of nodes is in range [0, 5000]",
-      "-1000 <= Node.val <= 1000",
-      "-1000 <= targetSum <= 1000",
+      "-1000 ≤ Node.val ≤ 1000",
+      "-1000 ≤ targetSum ≤ 1000",
     ],
     followUp: "Can you find all paths that sum to target? (Path Sum II)",
   },
@@ -1490,8 +1589,8 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     category: "graphs",
     description: "You are given a network of n nodes, labeled from 1 to n. You are also given times, a list of travel times as directed edges times[i] = (ui, vi, wi), where ui is the source node, vi is the target node, and wi is the time it takes for a signal to travel from source to target. Return the minimum time it takes for all n nodes to receive the signal. If it is impossible, return -1.",
     constraints: [
-      "1 <= k <= n <= 100",
-      "1 <= times.length <= 6000",
+      "1 ≤ k ≤ n ≤ 100",
+      "1 ≤ times.length ≤ 6000",
       "times[i].length == 3",
     ],
     followUp: "Can you solve it using Dijkstra's algorithm?",
@@ -1505,7 +1604,7 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     category: "dp",
     description: "You are climbing a staircase. It takes n steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?",
     constraints: [
-      "1 <= n <= 45",
+      "1 ≤ n ≤ 45",
     ],
     followUp: "Can you generalize to k steps at a time?",
   },
@@ -1518,9 +1617,9 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     category: "dp",
     description: "You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money. Return the fewest number of coins that you need to make up that amount. If that amount cannot be made up by any combination of the coins, return -1.",
     constraints: [
-      "1 <= coins.length <= 12",
-      "1 <= coins[i] <= 2^31 - 1",
-      "0 <= amount <= 10^4",
+      "1 ≤ coins.length ≤ 12",
+      "1 ≤ coins[i] ≤ 2³¹ - 1",
+      "0 ≤ amount ≤ 10⁴",
     ],
     followUp: "Can you solve it using both top-down and bottom-up DP?",
   },
@@ -1533,7 +1632,7 @@ followUp: "Can you solve it using recursion, memoization, and bottom-up tabulati
     category: "dp",
     description: "Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2. You have three operations: Insert, Delete, Replace a character.",
     constraints: [
-      "0 <= word1.length, word2.length <= 500",
+      "0 ≤ word1.length, word2.length ≤ 500",
       "word1 and word2 consist of lowercase English letters",
     ],
     followUp: "Can you optimize the space complexity from O(m*n) to O(min(m,n))?",
@@ -1596,14 +1695,14 @@ const dailyChallenges = [
 
 const chatbotResponses = {
   "time complexity":
-    "Time complexity measures how an algorithm's runtime grows with input size. Common complexities: O(1) constant, O(log n) logarithmic, O(n) linear, O(n log n) linearithmic, O(n^2) quadratic, O(2^n) exponential.",
+    "Time complexity measures how an algorithm's runtime grows with input size. Common complexities: O(1) constant, O(log n) logarithmic, O(n) linear, O(n log n) linearithmic, O(n²) quadratic, O(2^n) exponential.",
   "space complexity":
     "Space complexity measures memory usage relative to input size. Aim for O(1) or O(n) space. In-place algorithms modify input directly.",
   arrays:
     "Arrays provide O(1) random access but fixed size. Use when you need fast lookups and index-based access. Key operations: insert O(n), delete O(n), search O(n) unsorted / O(log n) binary search on sorted arrays.",
   "linked list":
     "Linked lists offer O(1) insertion/deletion at any position but O(n) access time. Use when frequent insertions/deletions needed. Types: singly (one pointer), doubly (two pointers), circular (last points to first).",
-  tree: "Trees are hierarchical. Binary trees: each node has <=2 children. BST: left < root < right. Balanced (AVL, Red-Black) ensure O(log n) operations. Traversals: inorder (left-root-right), preorder (root-left-right), postorder (left-right-root).",
+  tree: "Trees are hierarchical. Binary trees: each node has ≤2 children. BST: left < root < right. Balanced (AVL, Red-Black) ensure O(log n) operations. Traversals: inorder (left-root-right), preorder (root-left-right), postorder (left-right-root).",
   graph:
     "Graphs represent networks. Directed vs undirected, weighted vs unweighted, cyclic vs acyclic. Representations: adjacency list (space-efficient) vs adjacency matrix (O(1) edge lookup). Traversals: BFS (shortest path on unweighted graphs), DFS (cycle detection, topological sort).",
   "dynamic programming":
@@ -1611,13 +1710,13 @@ const chatbotResponses = {
   greedy:
     "Greedy algorithms make locally optimal choices hoping for global optimum. Works when greedy choice property holds. Examples: Dijkstra's shortest path, Huffman coding, activity selection.",
   sorting:
-    "Common sorting algorithms: Bubble O(n^2), Selection O(n^2), Insertion O(n^2) (good for small/nearly sorted), Merge O(n log n) stable, Quick O(n log n) average, Heap O(n log n) in-place, Counting O(n+k) for bounded range, Radix O(d(n+b)).",
+    "Common sorting algorithms: Bubble O(n²), Selection O(n²), Insertion O(n²) (good for small/nearly sorted), Merge O(n log n) stable, Quick O(n log n) average, Heap O(n log n) in-place, Counting O(n+k) for bounded range, Radix O(d(n+b)).",
   "binary search":
-    "Binary search on sorted arrays: repeatedly divide search interval in half. Time O(log n). Template: low=0, high=n-1; while low<=high: mid=(low+high)/2; if target=arr[mid] return; else adjust bounds.",
+    "Binary search on sorted arrays: repeatedly divide search interval in half. Time O(log n). Template: low=0, high=n-1; while low≤high: mid=(low+high)/2; if target=arr[mid] return; else adjust bounds.",
   recursion:
     "Recursion solves problems by breaking into smaller subproblems. Base case stops recursion. Recursive case calls function with smaller input. Use for tree traversals, backtracking, divide & conquer. Watch stack overflow for deep recursion.",
   "big o":
-    "Big O describes upper bound of growth rate. Best, average, worst cases differ. Common: O(1) < O(log n) < O(n) < O(n log n) < O(n^2) < O(2^n) < O(n!). Space complexity also matters.",
+    "Big O describes upper bound of growth rate. Best, average, worst cases differ. Common: O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2^n) < O(n!). Space complexity also matters.",
   bfs: "Breadth-First Search explores all neighbors before moving deeper. Use queue. Applications: shortest path (unweighted), level-order traversal, web crawling, social networks (degrees of separation).",
   dfs: "Depth-First Search goes deep before backtracking. Use stack (explicit or recursion). Applications: cycle detection, topological sort, connected components, maze solving. Three tree traversals: inorder, preorder, postorder.",
   "system design":
@@ -1655,14 +1754,22 @@ let userProgress = {
   activityData: {}, // date-string -> count (e.g. "2026-06-05" -> 3)
 };
 
-applySavedTheme();
 
 // ===== QUIZ EDITOR (state) =====
 // Declared early to avoid TDZ issues when referenced by event handlers.
 let currentProblem = null;
 
+/**
+ * @function initApplication
+ * @description Wraps core application startup logic, UI rendering, and global DOM event 
+ * listeners to ensure safe execution only after the HTML DOM is fully parsed.
+ * Fixes unexpected initialization crashes on production deployment environments (e.g., Vercel).
+ * @see {@link https://github.com/Eshajha19/Algo-Infinity-Verse/issues/258}
+ */
 // ===== INITIALIZATION =====
 document.addEventListener("DOMContentLoaded", () => {
+
+  // Apply saved theme only after DOM is ready to avoid touching document.body too early
 
   loadUserData();
   initLoadingScreen();
@@ -1678,7 +1785,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initDailyChallenge();
   initChatbot();
   initProfile();
-  initDarkMode();
   initNewsletterValidation();
   initScrollEffects();
   initFooterCurrentDate();
@@ -1823,7 +1929,6 @@ function initNavbar() {
     });
   }
 
-  // Dropdown functionality
   const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
   const isMobile = () => window.matchMedia("(max-width: 1024px)").matches;
 
@@ -1847,14 +1952,12 @@ function initNavbar() {
       }, 250);
     };
 
-    // Desktop: hover to open
     parent.addEventListener("mouseenter", () => { if (!isMobile()) showMenu(); });
     parent.addEventListener("mouseleave", () => { if (!isMobile()) hideMenu(); });
     toggle.addEventListener("focus", () => { if (!isMobile()) showMenu(); });
     menu.addEventListener("focusin", () => { if (!isMobile()) showMenu(); });
     parent.addEventListener("focusout", () => { if (!isMobile()) hideMenu(); });
 
-    // Mobile: click to toggle
     toggle.addEventListener("click", (e) => {
       if (isMobile()) {
         e.preventDefault();
@@ -1864,7 +1967,6 @@ function initNavbar() {
       }
     });
 
-    // Close dropdown on item click (mobile)
     menu.querySelectorAll(".dropdown-item").forEach((item) => {
       item.addEventListener("click", () => {
         if (isMobile()) {
@@ -1875,7 +1977,6 @@ function initNavbar() {
     });
   });
 
-  // Reset open state on resize
   window.addEventListener("resize", () => {
     if (!isMobile()) {
       if (navLinks.classList.contains("active")) {
@@ -1887,18 +1988,6 @@ function initNavbar() {
       dropdownToggles.forEach((toggle) => {
         toggle.setAttribute("aria-expanded", "false");
       });
-    }
-  });
-
-  // Scroll effect
-  window.addEventListener("scroll", () => {
-    const navbar = document.querySelector(".navbar");
-    if (navbar) {
-      if (window.scrollY > 100) {
-        navbar.style.background = "rgba(10, 10, 26, 0.95)";
-      } else {
-        navbar.style.background = "rgba(10, 10, 26, 0.85)";
-      }
     }
   });
 }
@@ -2959,7 +3048,7 @@ const roadmapSteps = [
         <li><strong>O(log N) - Logarithmic:</strong> The problem size is divided in half at each step (e.g., Binary Search).</li>
         <li><strong>O(N) - Linear:</strong> Time increases proportionally with input size (e.g., traversing an array or linked list, linear search).</li>
         <li><strong>O(N log N) - Linearithmic:</strong> Efficient sorting algorithms (e.g., Merge Sort, Quick Sort).</li>
-        <li><strong>O(N^2) - Quadratic:</strong> Nested loops over the input (e.g., Bubble Sort, Insertion Sort).</li>
+        <li><strong>O(N²) - Quadratic:</strong> Nested loops over the input (e.g., Bubble Sort, Insertion Sort).</li>
       </ul>
       <p><strong>Space Complexity:</strong> The amount of memory an algorithm needs relative to the input size. Creating a new array of size N requires O(N) space, while modifying a structure in-place requires O(1) space.</p>
     `,
@@ -4573,38 +4662,6 @@ function initScrollEffects() {
     });
 }
 
-// ===== DARK MODE =====
-
-function applySavedTheme() {
-  const savedMode = localStorage.getItem("darkMode");
-
-  if (savedMode === "light") {
-    document.body.classList.add("light-mode");
-  }
-}
-
-function initDarkMode() {
-  const toggle = document.getElementById("darkModeToggle");
-  if (!toggle) return;
-  const icon = toggle.querySelector("i");
-
-  // Check saved preference
-  const savedMode = localStorage.getItem("darkMode");
-  if (savedMode === "light") {
-    document.body.classList.add("light-mode");
-    icon.classList.remove("fa-moon");
-    icon.classList.add("fa-sun");
-  }
-
-  toggle.addEventListener("click", () => {
-    document.body.classList.toggle("light-mode");
-    const isLight = document.body.classList.contains("light-mode");
-    icon.classList.toggle("fa-moon");
-    icon.classList.toggle("fa-sun");
-    localStorage.setItem("darkMode", isLight ? "light" : "dark");
-  });
-}
-
 // ===== UTILITIES =====
 function initializeAnimations() {
   // Animate elements on scroll using Intersection Observer
@@ -5078,7 +5135,7 @@ function generateExamples(problem) {
     7: `<strong>Example 1:</strong><br>Input: nums = [10,9,2,5,3,7,101,18]<br>Output: 4<br>Explanation: [2,3,7,101] is the longest increasing subsequence<br><br>
         <strong>Example 2:</strong><br>Input: nums = [0,1,0,3,2,3]<br>Output: 4<br><br>
         <strong>Edge Cases:</strong><br>• All elements same → LIS = 1<br>• Already sorted → LIS = n<br><br>
-        <strong>Follow-up:</strong> Can you improve from O(n^2) DP to O(n log n) using Binary Search?`,
+        <strong>Follow-up:</strong> Can you improve from O(n²) DP to O(n log n) using Binary Search?`,
 
     8: `<strong>Example 1:</strong><br>Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]<br>Output: 5<br>Explanation: hit→hot→dot→dog→cog<br><br>
         <strong>Example 2:</strong><br>Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log"]<br>Output: 0<br>Explanation: endWord not in wordList<br><br>
@@ -5149,7 +5206,7 @@ function generateExamples(problem) {
         <strong>Edge Cases:</strong><br>• No common elements → return []<br>• All elements in common → return unique elements of either array<br>• One array is empty → return []<br>• Both arrays identical → return unique elements of the array<br><br>
         <strong>Key Insight (Hash Set):</strong><br>• Convert nums1 into a Set for O(1) lookups<br>• Iterate nums2 and check membership in the Set<br>• Store matches in a result Set to avoid duplicates<br><br>
         <strong>Follow-up:</strong> Can you solve it in O(n + m) time using two Hash Sets? What changes if both arrays are pre-sorted?`,
-    21: `<strong>Example 1:</strong><br>Input: nums = [1,2,3,4]<br>Output: true<br>Explanation: The array is sorted in non-decreasing order: 1 <= 2 <= 3 <= 4.<br><br>
+    21: `<strong>Example 1:</strong><br>Input: nums = [1,2,3,4]<br>Output: true<br>Explanation: The array is sorted in non-decreasing order: 1 ≤ 2 ≤ 3 ≤ 4.<br><br>
         <strong>Example 2:</strong><br>Input: nums = [5,4,3,2,1]<br>Output: false<br>Explanation: The array is not sorted.<br><br>
         <strong>Example 3:</strong><br>Input: nums = [1,1,2,2,3]<br>Output: true<br>Explanation: The array is sorted (duplicates are allowed and still sorted).<br><br>
         <strong>Edge Cases:</strong><br>• Empty array or single element array → true by default<br>• Negative values<br><br>
@@ -5831,8 +5888,6 @@ document.addEventListener("click", (e) => {
 });
 
 // Footer question handlers for quiz editor
-// NOTE: keep this block contiguous to avoid accidental stray tokens
-// (fix/clarity for contributors/CI)
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("footer-question")) {
     const question = e.target.getAttribute("data-question");
@@ -6073,3 +6128,280 @@ function initBackToTopButtons() {
 }
 
 initBackToTopButtons();
+
+
+// Centralized SPA State Router for Native Browser Navigation
+window.addEventListener('hashchange', () => {
+    const currentHash = window.location.hash || '#home';
+    console.log(`[Router] Navigation hash shifted to: ${currentHash}`);
+
+    if (currentHash === '#home' || currentHash === '') {
+        // 1. Scan the entire page dynamically for any layout changes
+        document.querySelectorAll('*').forEach(element => {
+            // A. If an element is a quiz or assistant component, hide it completely
+            if (element.id?.toLowerCase().includes('quiz') || 
+                element.className?.toString().toLowerCase().includes('quiz') ||
+                element.id?.toLowerCase().includes('assistant')) {
+                element.style.display = 'none';
+            } 
+            // B. If it's a main structural container that was hidden, bring it back
+            else if (element.classList.contains('hidden') && element.id !== 'loading-screen') {
+                element.classList.remove('hidden');
+                element.style.display = ''; // Resets style to default stylesheet value
+            }
+        });
+
+        // 2. Clear any active runtime quiz instances safely
+        if (typeof tQuiz !== 'undefined') {
+            tQuiz = null;
+        }
+    }
+});
+// ===== GAME SYSTEM =====
+let currentGame = {
+  type: null,
+  topic: null,
+  questions: [],
+  currentIndex: 0,
+  score: 0,
+  correct: 0,
+  total: 0,
+  timer: null,
+  timeLeft: 30,
+  xpEarned: 0,
+};
+
+// Complexity guesser questions
+const complexityQuestions = [
+  {
+    question: "What is the time complexity of this code?\n\nfor(let i=0; i<n; i++) {\n  console.log(i);\n}",
+    options: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    correct: 2,
+    explanation: "Single loop runs n times = O(n)"
+  },
+  {
+    question: "What is the time complexity?\n\nfor(let i=0; i<n; i++) {\n  for(let j=0; j<n; j++) {\n    console.log(i,j);\n  }\n}",
+    options: ["O(n)", "O(n log n)", "O(n²)", "O(2^n)"],
+    correct: 2,
+    explanation: "Nested loops both running n times = O(n²)"
+  },
+  {
+    question: "What is the time complexity?\n\nlet i = n;\nwhile(i > 1) {\n  i = Math.floor(i/2);\n}",
+    options: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    correct: 1,
+    explanation: "Halving n each time = O(log n)"
+  },
+  {
+    question: "What is the space complexity?\n\nfunction sum(n) {\n  if(n <= 0) return 0;\n  return n + sum(n-1);\n}",
+    options: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    correct: 2,
+    explanation: "Recursive calls stack n frames = O(n) space"
+  },
+  {
+    question: "What is the time complexity of binary search?",
+    options: ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+    correct: 1,
+    explanation: "Binary search halves search space each step = O(log n)"
+  },
+  {
+    question: "What is the time complexity?\n\nconst map = {};\nfor(let i=0; i<n; i++) {\n  map[arr[i]] = i;\n}",
+    options: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    correct: 2,
+    explanation: "Single loop with O(1) hash operations = O(n)"
+  },
+  {
+    question: "What is the time complexity of merge sort?",
+    options: ["O(n)", "O(n log n)", "O(n²)", "O(log n)"],
+    correct: 1,
+    explanation: "Merge sort divides and merges = O(n log n)"
+  },
+  {
+    question: "What is the space complexity of an array of size n?",
+    options: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    correct: 2,
+    explanation: "Array stores n elements = O(n) space"
+  },
+  {
+    question: "What is the time complexity of accessing a hash map?",
+    options: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    correct: 0,
+    explanation: "Hash map provides O(1) average access time"
+  },
+  {
+    question: "What is the time complexity?\n\nfor(let i=1; i<n; i*=2) {\n  console.log(i);\n}",
+    options: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    correct: 1,
+    explanation: "Multiplying by 2 each time = O(log n)"
+  },
+];
+
+function openGameModal() {
+  const modal = document.getElementById("gameModal");
+  const level = userProgress.level || 1;
+  const levelNames = ["Beginner","Novice","Intermediate","Advanced","Expert","Master","Grandmaster","Legend"];
+  document.getElementById("gameModalTitle").textContent = 
+    `🎮 Level ${level} - ${levelNames[level-1]} Games`;
+  showGameTypeSelector();
+  modal.classList.add("active");
+}
+
+function closeGameModal() {
+  document.getElementById("gameModal").classList.remove("active");
+  clearInterval(currentGame.timer);
+  resetGame();
+}
+
+function showGameTypeSelector() {
+  document.getElementById("gameTypeSelector").style.display = "block";
+  document.getElementById("gamePlayArea").style.display = "none";
+  document.getElementById("gameResults").style.display = "none";
+  clearInterval(currentGame.timer);
+}
+
+function getTopicForLevel() {
+  const level = userProgress.level || 1;
+  const topics = ["arrays","strings","linkedlist","trees","graphs","dp","arrays","strings"];
+  return topics[level - 1] || "arrays";
+}
+
+function startGame(type) {
+  currentGame.type = type;
+  currentGame.score = 0;
+  currentGame.correct = 0;
+  currentGame.xpEarned = 0;
+  currentGame.currentIndex = 0;
+
+  const topic = getTopicForLevel();
+
+  if (type === "complexity") {
+    currentGame.questions = [...complexityQuestions].sort(() => Math.random() - 0.5).slice(0, 10);
+  } else {
+    const topicQuestions = quizQuestions[topic] || quizQuestions.arrays;
+    currentGame.questions = [...topicQuestions].sort(() => Math.random() - 0.5).slice(0, 10);
+  }
+
+  currentGame.total = currentGame.questions.length;
+
+  document.getElementById("gameTypeSelector").style.display = "none";
+  document.getElementById("gamePlayArea").style.display = "block";
+  document.getElementById("gameResults").style.display = "none";
+
+  loadGameQuestion();
+}
+
+function loadGameQuestion() {
+  if (currentGame.currentIndex >= currentGame.total) {
+    endGame();
+    return;
+  }
+
+  const q = currentGame.questions[currentGame.currentIndex];
+  document.getElementById("gameQuestion").textContent = currentGame.currentIndex + 1;
+  document.getElementById("gameScore").textContent = currentGame.score;
+  document.getElementById("gameQuestionText").textContent = q.question;
+  document.getElementById("gameExplanation").style.display = "none";
+
+  const optionsGrid = document.getElementById("gameOptionsGrid");
+  optionsGrid.innerHTML = q.options.map((opt, i) =>
+    `<button class="game-option" onclick="selectGameAnswer(${i})">${opt}</button>`
+  ).join("");
+
+  // Start timer
+  clearInterval(currentGame.timer);
+  currentGame.timeLeft = currentGame.type === "speed" ? 60 : 30;
+  
+  if (currentGame.type === "speed" && currentGame.currentIndex === 0) {
+    currentGame.timeLeft = 60;
+  }
+
+  document.getElementById("gameTimer").textContent = currentGame.timeLeft;
+
+  if (currentGame.type !== "speed" || currentGame.currentIndex === 0) {
+    currentGame.timer = setInterval(() => {
+      currentGame.timeLeft--;
+      document.getElementById("gameTimer").textContent = currentGame.timeLeft;
+      if (currentGame.timeLeft <= 0) {
+        clearInterval(currentGame.timer);
+        if (currentGame.type === "speed") {
+          endGame();
+        } else {
+          // Time's up — move to next
+          selectGameAnswer(-1);
+        }
+      }
+    }, 1000);
+  }
+}
+
+function selectGameAnswer(index) {
+  clearInterval(currentGame.timer);
+  const q = currentGame.questions[currentGame.currentIndex];
+  const options = document.querySelectorAll(".game-option");
+  const xpPerQ = currentGame.type === "quiz" ? 20 : currentGame.type === "speed" ? 10 : 15;
+
+  options.forEach(opt => opt.style.pointerEvents = "none");
+
+  if (index === q.correct) {
+    if (options[index]) options[index].classList.add("correct");
+    currentGame.score += 10;
+    currentGame.correct++;
+    currentGame.xpEarned += xpPerQ;
+    document.getElementById("gameScore").textContent = currentGame.score;
+  } else {
+    if (options[index]) options[index].classList.add("wrong");
+    if (options[q.correct]) options[q.correct].classList.add("correct");
+  }
+
+  // Show explanation
+  const expEl = document.getElementById("gameExplanation");
+  expEl.textContent = `💡 ${q.explanation}`;
+  expEl.style.display = "block";
+
+  currentGame.currentIndex++;
+
+  setTimeout(() => {
+    loadGameQuestion();
+  }, currentGame.type === "speed" ? 800 : 1500);
+}
+
+function endGame() {
+  clearInterval(currentGame.timer);
+
+  // Award XP
+  addXP(currentGame.xpEarned);
+  updateGamification();
+
+  const accuracy = Math.round((currentGame.correct / currentGame.total) * 100);
+
+  document.getElementById("gamePlayArea").style.display = "none";
+  document.getElementById("gameResults").style.display = "block";
+
+  const titles = {
+    quiz: "Quiz Complete! 🧩",
+    speed: "Speed Round Over! ⚡",
+    complexity: "Complexity Master! 🎯"
+  };
+
+  document.getElementById("gameResultsTitle").textContent = titles[currentGame.type];
+  document.getElementById("resultScore").textContent = currentGame.score;
+  document.getElementById("resultXP").textContent = `+${currentGame.xpEarned}`;
+  document.getElementById("resultAccuracy").textContent = `${accuracy}%`;
+
+  // Show notification
+  showNotification(
+    `🎮 Game Over! Score: ${currentGame.score} | +${currentGame.xpEarned} XP earned!`,
+    "success"
+  );
+}
+
+function restartGame() {
+  startGame(currentGame.type);
+}
+
+function resetGame() {
+  currentGame = {
+    type: null, topic: null, questions: [],
+    currentIndex: 0, score: 0, correct: 0,
+    total: 0, timer: null, timeLeft: 30, xpEarned: 0,
+  };
+}

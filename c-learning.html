@@ -50,11 +50,14 @@
             <a href="index.html#practice" class="dropdown-item" role="menuitem">Practice Problems</a>
             <a href="index.html#quiz" class="dropdown-item" role="menuitem">Quizzes</a>
             <a href="index.html#roadmap" class="dropdown-item" role="menuitem">Learning Roadmap</a>
+            <a href="array-learning.html" class="dropdown-item active" role="menuitem">Learn Arrays</a>
             <a href="python-learning.html" class="dropdown-item" role="menuitem">Learn Python</a>
             <a href="javascript-learning.html" class="dropdown-item" role="menuitem">Learn JavaScript</a>
             <a href="java-learning.html" class="dropdown-item" role="menuitem">Learn Java</a>
             <a href="cplusplus-learning.html" class="dropdown-item" role="menuitem">Learn C++</a>
+            <a href="c-editor.html" class="dropdown-item" role="menuitem">C Editor</a>
             <a href="c-learning.html" class="dropdown-item active" role="menuitem">Learn C</a>
+            <a href="sql-learning.html" class="dropdown-item" role="menuitem">Learn SQL</a>
             <a href="recursion-learning.html" class="dropdown-item" role="menuitem">Learn Recursion</a>
             <a href="dbms-learning.html" class="dropdown-item" role="menuitem">Learn DBMS</a>
            
@@ -66,6 +69,7 @@
             <a href="divide-and-conquer-learning.html"  class="dropdown-item">Learn Divide &amp; Conquer</a>
             <a href="bit-manipulation-learning.html"  class="dropdown-item">Learn Bit Manipulation</a>
             <a href="computer-architecture.html" class="dropdown-item" role="menuitem">Learn Architecture</a>
+            <a href="os-learning.html" class="dropdown-item" role="menuitem">Learn OS</a>
             <a href="tree-traversal.html" class="dropdown-item" role="menuitem">Tree Traversal</a>
           </div>
         </li>
@@ -159,6 +163,7 @@
           <a href="#introduction" class="btn btn-primary" style="background: linear-gradient(135deg, #5B9CF8 0%, #A8D0FF 100%); border: none; color: #fff; font-weight: 600;">
             <i class="fas fa-play"></i> Start Learning
           </a>
+          <a href="c-editor.html" class="btn btn-secondary"><i class="fas fa-code"></i> C Editor</a>
           <a href="#exercise-variables" class="btn btn-secondary">
             <i class="fas fa-pen"></i> Practice Exercises
           </a>
@@ -215,6 +220,7 @@
               <li><a href="#arrays-strings"><span class="nav-icon">📋</span> Arrays &amp; Strings</a></li>
               <li><a href="#pointers"><span class="nav-icon">📍</span> Pointers</a></li>
               <li><a href="#structs"><span class="nav-icon">🏗️</span> Structures</a></li>
+              <li><a href="c-editor.html" class="ce-nav-link" style="color: #5B9CF8; font-weight: 600;"><span class="nav-icon">💻</span> C Editor</a></li>
             </ul>
           </aside>
 
@@ -1627,6 +1633,24 @@ int main() {
               </div>
             </article>
 
+            <article class="c-lesson" id="playground">
+              <div class="c-lesson-header">
+                <span class="c-lesson-number">12</span>
+                <h3>C Learning Playground</h3>
+              </div>
+              <p>
+                Ready to practice what you've learned? Use our interactive C editor to write, compile, and run your code directly in the browser.
+              </p>
+              <div class="c-concept-card playground-card" style="border: 2px dashed #5B9CF8; background: rgba(91, 156, 248, 0.05); text-align: center; padding: 3rem 1rem;">
+                <i class="fas fa-terminal" style="font-size: 3rem; color: #5B9CF8; margin-bottom: 1.5rem;"></i>
+                <h4>Interactive C Editor</h4>
+                <p>Test pointers, structs, and loops with real-time output.</p>
+                <a href="c-editor.html" class="btn btn-primary" style="background: linear-gradient(135deg, #5B9CF8 0%, #A8D0FF 100%); border: none; margin-top: 1rem;">
+                  <i class="fas fa-play"></i> Launch Editor
+                </a>
+              </div>
+            </article>
+
           </main>
         </div>
       </div>
@@ -1664,11 +1688,14 @@ int main() {
               <li><a href="#">Blog</a></li>
               <li><a href="community.html">Community</a></li>
               <li><a href="cheat-sheets.html">DSA Cheat Sheets</a></li>
+              <li><a href="array-learning.html">Learn Arrays</a></li>
               <li><a href="python-learning.html">Learn Python</a></li>
               <li><a href="javascript-learning.html">Learn JavaScript</a></li>
               <li><a href="java-learning.html">Learn Java</a></li>
               <li><a href="cplusplus-learning.html">Learn C++</a></li>
               <li><a href="c-learning.html">Learn C</a></li>
+              <li><a href="c-editor.html">C Editor</a></li>
+              <li><a href="sql-learning.html">Learn SQL</a></li>
               <li><a href="dbms-learning.html">Learn DBMS</a></li>
               <li><a href="php-learning.html">Learn PHP</a></li>
               <li><a href="sliding-window-learning.html">Learn Sliding Window</a></li>
@@ -1680,10 +1707,13 @@ int main() {
               <li><a href="oop-learning.html">Learn OOP</a></li>
               <li><a href="recursion-learning.html">Learn Recursion</a></li>
               <li><a href="computer-architecture.html">Learn Architecture</a></li>
+              <li><a href="os-learning.html">Learn OS</a></li>
               <li><a href="tree-traversal.html">Tree Traversal</a></li>
               <li><a href="sorting-visualizer.html">Sorting Visualizer</a></li>
               <li><a href="graph-visualizer.html">Graph Visualizer</a>
-            <a href="pathfinding-visualizer.html">Pathfinding Visualizer</a></li>
+            <a href="pathfinding-visualizer.html">Pathfinding Visualizer</a>
+              <a href="recursion-tree-visualizer.html">Recursion Tree Visualizer</a>
+            <a href="complexity-calculator.html" class="dropdown-item" role="menuitem">Complexity Calculator</a></li>
               <li><a href="resume.html">Coding Resume</a></li>
               <li><a href="support-page/index.html">Support</a></li>
               <li><a href="feedback.html">Feedback</a></li>
@@ -1717,6 +1747,7 @@ int main() {
 
     <script src="./auth.js"></script>
     <script src="./script.js"></script>
+    <script src="./theme.js"></script>
     <script src="./c-learning.js"></script>
   </body>
 </html>
